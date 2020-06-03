@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    public interface IEntityRepository<T> where T : IEntity
+    public interface IEntityRepository<T> where T : class, IEntity
     {
         IQueryable<T> ObterQueryEntidade();
         Task<T> CriarEntidadeAsync(T entidade);
