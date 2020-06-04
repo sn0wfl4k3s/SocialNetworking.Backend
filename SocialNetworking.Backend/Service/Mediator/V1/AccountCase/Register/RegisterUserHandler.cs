@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Core.Service;
+using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -13,4 +13,8 @@
     <Folder Include="Mediator\V1\AccountCase\Login\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Service\Core.Service.csproj" />
+  </ItemGroup>
+
 </Project>

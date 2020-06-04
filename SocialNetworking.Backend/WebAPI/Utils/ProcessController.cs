@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using Core.Service;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Service;
 using System.Threading.Tasks;
 
 namespace WebAPI.Utils

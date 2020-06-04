@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Core.Service;
+using MediatR;
 
 namespace Service.Mediator.V1.AccountCase.Register
 {
