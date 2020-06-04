@@ -15,9 +15,9 @@ namespace InfraData
 
         // ~ Migrations ~
         // In Console:
-        // cd ./MyNetwork.InfraData/
-        // dotnet ef migrations add Initial -c ApplicationDbContext -s ..\MyNetwork.WebApi\
-        // dotnet ef database update -c ApplicationDbContext -s ..\MyNetwork.WebApi\
+        // cd ./InfraData/
+        // dotnet ef migrations add Initial -c ApplicationDbContext -s ..\WebApi\
+        // dotnet ef database update -c ApplicationDbContext -s ..\WebApi\
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -33,7 +33,7 @@ namespace InfraData
 
                 optionsBuilder
                     .UseLazyLoadingProxies()
-                    //.UseSqlServer(connection)
+                    .UseSqlite(connection)
                     .EnableSensitiveDataLogging();
             }
         }
