@@ -1,8 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
+using MyNetwork.InfraData.Mapping;
 
 namespace InfraData
 {
@@ -16,26 +14,26 @@ namespace InfraData
         // ~ Migrations ~
         // In Console:
         // cd ./InfraData/
-        // dotnet ef migrations add Initial -c ApplicationDbContext -s ..\WebApi\
-        // dotnet ef database update -c ApplicationDbContext -s ..\WebApi\
+        // dotnet ef migrations add Initial -c ApplicationDbContext -s ..\WebApi\ -v
+        // dotnet ef database update -c ApplicationDbContext -s ..\WebApi\ -v
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-                var configure = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile($"appsettings.{environment}.json")
-                    .Build();
-
-                var connection = configure.GetConnectionString("DefaultConnection");
+                const string connection = "Data Source=database.db";
 
                 optionsBuilder
                     .UseLazyLoadingProxies()
                     .UseSqlite(connection)
                     .EnableSensitiveDataLogging();
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("Net");
+
+            modelBuilder.ApplyConfiguration(new UserMap());
         }
     }
 }

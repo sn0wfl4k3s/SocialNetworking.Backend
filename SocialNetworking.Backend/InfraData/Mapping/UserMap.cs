@@ -8,6 +8,8 @@ namespace MyNetwork.InfraData.Mapping
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.ToTable("User");
+
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Name).IsRequired();

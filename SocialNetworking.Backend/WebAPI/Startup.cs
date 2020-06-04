@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using InfraData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using MyNetwork.WebApi.Extensions;
 
 namespace WebAPI
@@ -30,7 +24,7 @@ namespace WebAPI
         {
             services.AddControllers();
 
-            //services.AddDbContext<ApplicationDbContext>();
+            services.AddDbContext<ApplicationDbContext>();
 
             services.AddConfigurations(Configuration);
 
@@ -49,9 +43,9 @@ namespace WebAPI
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
-            IWebHostEnvironment env, 
-            IApiVersionDescriptionProvider provider, 
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            IApiVersionDescriptionProvider provider,
             ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
