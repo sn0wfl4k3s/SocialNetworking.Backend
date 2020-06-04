@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using Core.Domain;
 
 namespace Domain
 {

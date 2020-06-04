@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 
-namespace Core
+namespace Core.Domain
 {
     public interface IEntityRepository<T> where T : class, IEntity
     {

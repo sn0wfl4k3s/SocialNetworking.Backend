@@ -10,7 +10,7 @@ namespace WebAPI.Features.V1.Controllers
     [Authorize(Roles = Roles.User)]
     [Produces(MediaTypeNames.Application.Json)]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class UserController : ControllerBase
+    public class PostController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
