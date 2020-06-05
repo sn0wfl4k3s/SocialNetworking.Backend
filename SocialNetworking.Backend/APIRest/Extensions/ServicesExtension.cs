@@ -64,6 +64,9 @@ namespace MyNetwork.WebApi.Extensions
         public static IServiceCollection AddRepositorys(this IServiceCollection services)
         {
             services.AddTransient<IEntityRepository<User>, UserRepository>();
+            services.AddTransient<IEntityRepository<Post>, PostRepository>();
+            services.AddTransient<IEntityRepository<Comment>, CommentRepository>();
+            services.AddTransient<IEntityRepository<Domain.Entity.File>, FileRepository>();
 
             return services;
         }
