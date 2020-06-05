@@ -1,4 +1,4 @@
-﻿using Domain;
+﻿using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using InfraData.Mapping;
 
@@ -10,6 +10,9 @@ namespace InfraData
         { }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<File> Files { get; set; }
 
         // ~ Migrations ~
         // In Console:
@@ -32,6 +35,9 @@ namespace InfraData
             modelBuilder.HasDefaultSchema("Net");
 
             modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new PostMap());
+            modelBuilder.ApplyConfiguration(new FileMap());
+            modelBuilder.ApplyConfiguration(new CommentMap());
         }
     }
 }

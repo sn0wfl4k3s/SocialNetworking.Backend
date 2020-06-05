@@ -1,4 +1,4 @@
-﻿using Domain;
+﻿using Domain.Entity;
 using InfraData.Core;
 
 namespace InfraData.Repository

@@ -1,9 +1,6 @@
-﻿using Core.Domain;
-using Domain;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service.Mediator.V1.AccountCase.Register;
 using System.Net.Mime;
@@ -31,16 +28,6 @@ namespace WebAPI.Features.V1.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register(RegisterUserCommand command)
             => await Process(command);
-
-        [HttpGet]
-        [Route("Todos")]
-        public async Task<IActionResult> GetAll ([FromServices] IEntityRepository<User> repository)
-        {
-
-            var result = await repository.ObterQueryEntidade().AsNoTracking().ToListAsync();
-
-            return Ok(result);
-        }
 
     }
 }

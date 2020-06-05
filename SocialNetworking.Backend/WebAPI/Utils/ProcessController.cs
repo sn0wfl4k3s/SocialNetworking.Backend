@@ -26,12 +26,14 @@ namespace WebAPI.Utils
 
             var response = await task;
 
-            if (response.Result != null)
+            if (response.HasError)
             {
-                return Ok(response);
+                _logger.LogError(JsonConvert.SerializeObject(response.Errors));
+                
+                return BadRequest(response);
             }
-
-            return BadRequest(response);
+            
+            return Ok(response);
         }
     }
 }

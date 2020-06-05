@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Domain;
-using Domain;
+using Domain.Entity;
 using InfraData.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

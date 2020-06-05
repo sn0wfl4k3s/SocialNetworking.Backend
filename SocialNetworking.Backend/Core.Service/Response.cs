@@ -9,6 +9,8 @@ namespace Core.Service
 
         public Response() => Errors = new Dictionary<string, List<string>>();
 
+        public bool HasError => Errors.Keys.Count > 0;
+
         public void AddResult(TResponse result) => Result = result;
 
         public void AddError(string key, string message)
