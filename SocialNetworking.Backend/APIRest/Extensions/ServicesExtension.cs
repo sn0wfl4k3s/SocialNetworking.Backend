@@ -83,7 +83,7 @@ namespace MyNetwork.WebApi.Extensions
             var assemblies = new List<Assembly>
             {
                 AppDomain.CurrentDomain.Load("Service"),
-                AppDomain.CurrentDomain.Load("WebApi")
+                AppDomain.CurrentDomain.Load("APIRest")
             };
 
             services.AddAutoMapper(assemblies);

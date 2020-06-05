@@ -11,6 +11,8 @@
 
   <PropertyGroup>
     <PublishReadyToRun>true</PublishReadyToRun>
+    <AssemblyName>APIRest</AssemblyName>
+    <RootNamespace>APIRest</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
