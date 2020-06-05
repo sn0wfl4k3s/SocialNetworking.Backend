@@ -1,6 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using MyNetwork.InfraData.Mapping;
+using InfraData.Mapping;
 
 namespace InfraData
 {
@@ -20,11 +20,9 @@ namespace InfraData
         {
             if (!optionsBuilder.IsConfigured)
             {
-                const string connection = "Data Source=database.db";
-
                 optionsBuilder
                     .UseLazyLoadingProxies()
-                    .UseSqlite(connection)
+                    .UseSqlite("Data Source=database.db")
                     .EnableSensitiveDataLogging();
             }
         }

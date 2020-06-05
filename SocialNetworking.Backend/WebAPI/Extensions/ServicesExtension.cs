@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Core.Domain;
+using Domain;
+using InfraData.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -60,7 +63,7 @@ namespace MyNetwork.WebApi.Extensions
 
         public static IServiceCollection AddRepositorys(this IServiceCollection services)
         {
-            //services.AddTransient<IEntidadeRepositorio<User>, UserRepository>();
+            services.AddTransient<IEntityRepository<User>, UserRepository>();
 
             return services;
         }

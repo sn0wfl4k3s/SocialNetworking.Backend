@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MyNetwork.InfraData.Mapping
+namespace InfraData.Mapping
 {
     public class UserMap : IEntityTypeConfiguration<User>
     {

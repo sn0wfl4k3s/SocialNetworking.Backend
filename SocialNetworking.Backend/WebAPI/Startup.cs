@@ -30,7 +30,7 @@ namespace WebAPI
 
             services.AddAuthSwagger("SocialNetworking API");
 
-            //services.AddLibrarys();
+            services.AddLibrarys();
 
             services.AddServices();
 
