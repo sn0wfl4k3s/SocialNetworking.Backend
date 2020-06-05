@@ -32,8 +32,6 @@ namespace InfraData
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("Net");
-
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new PostMap());
             modelBuilder.ApplyConfiguration(new FileMap());
