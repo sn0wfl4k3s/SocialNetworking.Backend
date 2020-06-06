@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Service.Mediator.V1.AccountCase.Login;
 using Service.Mediator.V1.AccountCase.Register;
 using System.Net.Mime;
 using System.Threading.Tasks;
@@ -21,13 +22,22 @@ namespace WebAPI.Features.V1.Controllers
         }
 
         /// <summary>
-        /// Register a new user.
+        /// Sign up a new user.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(RegisterUserCommand command)
             => await Process(command);
+
+        /// <summary>
+        /// Sign in a user registred.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login(LoginUserCommand query)
+            => await Process(query);
 
     }
 }

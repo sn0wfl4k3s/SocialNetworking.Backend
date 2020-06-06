@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mediator\V1\AccountCase\Login\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
     <ProjectReference Include="..\Core.Service\Core.Service.csproj" />
     <ProjectReference Include="..\CrossCutting\CrossCutting.csproj" />
