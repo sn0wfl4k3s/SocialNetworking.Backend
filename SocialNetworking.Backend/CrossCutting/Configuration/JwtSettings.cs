@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Configuration
+﻿namespace CrossCutting.Configuration
 {
     public class JwtSettings
     {

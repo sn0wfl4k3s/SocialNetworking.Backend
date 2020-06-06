@@ -1,28 +1,33 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Core.Service
 {
-    public class Response<TResponse>
+    public class Response<T>
     {
-        public IDictionary<string, List<string>> Errors { get; private set; }
-        public TResponse Result { get; private set; }
+        private readonly IDictionary<string, List<string>> _messages = new Dictionary<string, List<string>>();
 
-        public Response() => Errors = new Dictionary<string, List<string>>();
+        public IDictionary<string, List<string>> Errors { get; }
+        public T Result { get; }
 
-        public bool HasError => Errors.Keys.Count > 0;
+        public Response() => Errors = new ReadOnlyDictionary<string, List<string>>(_messages);
 
-        public void AddResult(TResponse result) => Result = result;
+        public Response(T result) : this() => Result = result;
+        
+        public bool HasError => _messages.Keys.Count > 0;
 
-        public void AddError(string key, string message)
+        public Response<T> AddError(string key, string message)
         {
-            if (!Errors.ContainsKey(key))
+            if (!_messages.ContainsKey(key))
             {
-                Errors.Add(key, new List<string>() { message });
+                _messages.Add(key, new List<string>() { message });
             }
             else
             {
-                Errors[key].Add(message);
+                _messages[key].Add(message);
             }
+
+            return this;
         }
     }
 }

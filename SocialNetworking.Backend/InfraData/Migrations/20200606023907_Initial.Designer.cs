@@ -9,14 +9,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfraData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200605203500_PostCommentFilesIncluded")]
-    partial class PostCommentFilesIncluded
+    [Migration("20200606023907_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Net")
                 .HasAnnotation("ProductVersion", "3.1.4");
 
             modelBuilder.Entity("Domain.Entity.Comment", b =>
@@ -37,9 +36,6 @@ namespace InfraData.Migrations
 
                     b.Property<ulong?>("PostId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -148,7 +144,7 @@ namespace InfraData.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

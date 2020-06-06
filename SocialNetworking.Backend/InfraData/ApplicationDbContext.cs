@@ -17,8 +17,8 @@ namespace InfraData
         // ~ Migrations ~
         // In Console:
         // cd ./InfraData/
-        // dotnet ef migrations add Initial -c ApplicationDbContext -s ..\WebApi\ -v
-        // dotnet ef database update -c ApplicationDbContext -s ..\WebApi\ -v
+        // dotnet ef migrations add Initial -c ApplicationDbContext -s ..\APIRest\ -v
+        // dotnet ef database update -c ApplicationDbContext -s ..\APIRest\ -v
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

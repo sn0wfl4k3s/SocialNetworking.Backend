@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Domain;
+using CrossCutting.Security;
 using Domain.Entity;
 using InfraData.Repository;
 using MediatR;
@@ -18,7 +19,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using WebAPI.Configuration;
+using CrossCutting.Configuration;
+using CrossCutting.Authentication;
+using CrossCutting.Account;
 
 namespace MyNetwork.WebApi.Extensions
 {
@@ -73,7 +76,9 @@ namespace MyNetwork.WebApi.Extensions
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            //services.AddTransient<ICryptService, CryptService>();
+            services.AddScoped<ICryptService, CryptService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             return services;
         }

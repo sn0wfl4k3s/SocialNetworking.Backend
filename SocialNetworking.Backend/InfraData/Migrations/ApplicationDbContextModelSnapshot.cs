@@ -14,7 +14,6 @@ namespace InfraData.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Net")
                 .HasAnnotation("ProductVersion", "3.1.4");
 
             modelBuilder.Entity("Domain.Entity.Comment", b =>
@@ -35,9 +34,6 @@ namespace InfraData.Migrations
 
                     b.Property<ulong?>("PostId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -146,7 +142,7 @@ namespace InfraData.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
