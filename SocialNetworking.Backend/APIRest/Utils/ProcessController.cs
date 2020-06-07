@@ -26,7 +26,7 @@ namespace WebAPI.Utils
 
             var response = await task;
 
-            if (response.HasError)
+            if (response.HasError())
             {
                 _logger.LogError(JsonConvert.SerializeObject(response.Errors));
                 

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Core.Domain;
+﻿using Core.Domain;
 using Core.Service;
 using CrossCutting.Authentication;
 using CrossCutting.Security;
@@ -7,6 +6,8 @@ using Domain.Entity;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,14 +18,12 @@ namespace Service.Mediator.V1.AccountCase.Login
         private readonly IEntityRepository<User> _repository;
         private readonly IAuthenticationService _authenticationService;
         private readonly ICryptService _cryptService;
-        private readonly IMapper _mapper;
 
-        public LoginUserHandler(IEntityRepository<User> repository, IAuthenticationService authenticationService, ICryptService cryptService, IMapper mapper)
+        public LoginUserHandler(IEntityRepository<User> repository, IAuthenticationService authenticationService, ICryptService cryptService)
         {
             _repository = repository;
             _authenticationService = authenticationService;
             _cryptService = cryptService;
-            _mapper = mapper;
         }
 
         public async Task<Response<LoginUserVM>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
@@ -33,12 +32,13 @@ namespace Service.Mediator.V1.AccountCase.Login
 
             try
             {
-                var hash = _cryptService.CreateHash(request.Password);
+                string hash = _cryptService.CreateHash(request.Password);
 
-                var user = await _repository
-                    .ObterQueryEntidade()
-                    .AsNoTracking()
-                    .FirstOrDefaultAsync(u => u.Email == request.Email && u.Password == hash);
+                Expression<Func<User, bool>> validUser = u =>
+                    u.Email.ToLower() == request.Email.ToLower() &&
+                    u.Password == hash;
+
+                var user = _repository.ObterQueryEntidade().AsNoTracking().FirstOrDefault(validUser);
 
                 if (user is null)
                 {
