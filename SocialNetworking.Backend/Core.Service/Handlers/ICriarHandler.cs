@@ -3,7 +3,7 @@ using Core.Service.Requests;
 
 namespace Core.Service.Handlers
 {
-    public interface ICriarHandler<TSource, TResponse> : IRequestHandler<CriarRequest<TSource, TResponse>, Response<TResponse>>
+    public interface ICriarHandler<TRequest, TResponse> : IRequestHandler<CriarRequest<TRequest, TResponse>, Response<TResponse>>
     {
     }
 }

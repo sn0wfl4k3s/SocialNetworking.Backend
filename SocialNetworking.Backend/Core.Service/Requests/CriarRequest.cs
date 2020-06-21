@@ -1,16 +1,11 @@
-﻿using MediatR;
+﻿using Core.Service.Requests.Core;
+using Domain.Entity;
 
 namespace Core.Service.Requests
 {
-    public class CriarRequest<TSource, TResponse> : IRequest<Response<TResponse>>
+    public class CriarRequest<TRequest, TResponse> : IRequestUser<TResponse>
     {
-        public string Authorization { get; set; }
-        public TSource Entidade { get; set; }
-
-        public CriarRequest(string authorization, TSource entidade)
-        {
-            Authorization = authorization;
-            Entidade = entidade;
-        }
+        public User User { get; set; }
+        public TRequest Entidade { get; set; }
     }
 }

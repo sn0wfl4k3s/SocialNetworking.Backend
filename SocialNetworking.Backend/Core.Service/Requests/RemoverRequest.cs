@@ -1,24 +1,12 @@
-﻿using MediatR;
+﻿using Core.Service.Requests.Core;
+using Domain.Entity;
 
 namespace Core.Service.Requests
 {
-    public class RemoverRequest<TSource, TResponse> : IRequest<Response<TResponse>>
+    public class RemoverRequest<TRequest, TResponse> : IRequestUser<TResponse>
     {
-        public string Authorization { get; set; }
-        public TSource Entidade { get; set; }
+        public User User { get; set; }
+        public TRequest Entidade { get; set; }
         public ulong Id { get; set; }
-
-
-        public RemoverRequest(string authorization, ulong id)
-        {
-            Authorization = authorization;
-            Id = id;
-        }
-
-        public RemoverRequest(string authorization, TSource entidade)
-        {
-            Authorization = authorization;
-            Entidade = entidade;
-        }
     }
 }

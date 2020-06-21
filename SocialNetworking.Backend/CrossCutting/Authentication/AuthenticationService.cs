@@ -2,12 +2,15 @@
 using CrossCutting.Configuration;
 using CrossCutting.Constants;
 using Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CrossCutting.Authentication
 {
@@ -48,6 +51,29 @@ namespace CrossCutting.Authentication
             var token = handler.WriteToken(securityToken);
 
             return (token, expires, "Bearer");
+        }
+
+        public async Task<(string Token, DateTime Expires, string Type)> CreateTokenJWTAsync(User user)
+        {
+            return await Task.FromResult(CreateTokenJWT(user));
+        }
+
+        public User GetUserByToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+
+            var jwt = handler.ReadJwtToken(token);
+
+            var username = jwt.Claims.First(c => c.Type == "unique_name").Value;
+
+            var user = _repository.ObterQueryEntidade().AsNoTracking().FirstOrDefault(u => u.Username == username);
+
+            return user;
+        }
+
+        public async Task<User> GetUserByTokenAsync(string token)
+        {
+            return await Task.FromResult(GetUserByToken(token));
         }
     }
 }

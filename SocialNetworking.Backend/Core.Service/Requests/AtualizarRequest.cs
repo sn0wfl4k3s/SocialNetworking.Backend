@@ -1,24 +1,12 @@
-﻿using MediatR;
+﻿using Core.Service.Requests.Core;
+using Domain.Entity;
 
 namespace Core.Service.Requests
 {
-    public class AtualizarRequest<TSource, TResponse> : IRequest<Response<TResponse>>
+    public class AtualizarRequest<TRequest, TResponse> : IRequestUser<TResponse>
     {
-        public string Authorization { get; set; }
-        public TSource Entidade { get; set; }
+        public User User { get; set; }
+        public TRequest Entidade { get; set; }
         public ulong Id { get; set; }
-
-        public AtualizarRequest(string authorization, TSource entidade, ulong id)
-        {
-            Authorization = authorization;
-            Entidade = entidade;
-            Id = id;
-        }
-
-        public AtualizarRequest(string authorization, TSource entidade)
-        {
-            Authorization = authorization;
-            Entidade = entidade;
-        }
     }
 }

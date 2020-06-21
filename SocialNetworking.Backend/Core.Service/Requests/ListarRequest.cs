@@ -1,11 +1,12 @@
-﻿using MediatR;
+﻿using Core.Service.Requests.Core;
+using Domain.Entity;
 
 namespace Core.Service.Requests
 {
-    public class ListarRequest<TResponse> : IRequest<Response<TResponse>>
+    public class ListarRequest<TResponse> : IRequestUser<TResponse>
     {
-        public string Parametro1 { get; set; }
-        public string Parametro2 { get; set; }
-        public string Parametro3 { get; set; }
+        public User User { get; set; }
+
+        public string Parameter { get; set; }
     }
 }

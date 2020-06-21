@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using CrossCutting.Authentication;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -6,18 +7,18 @@ using Service.Mediator.V1.AccountCase.Login;
 using Service.Mediator.V1.AccountCase.Register;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using WebAPI.Utils;
+using APIRest.Utils;
 
 namespace WebAPI.Features.V1.Controllers
 {
     [ApiController]
-    [ApiVersion("1")]
     [AllowAnonymous]
+    [ApiVersion("1")]
     [Produces(MediaTypeNames.Application.Json)]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class AccountController : ProcessController<AccountController>
     {
-        public AccountController(IMediator mediator, ILogger<AccountController> logger) : base(mediator, logger)
+        public AccountController(IMediator mediator, ILogger<AccountController> logger, IAuthenticationService authentication) : base(mediator, logger, authentication)
         {
         }
 
