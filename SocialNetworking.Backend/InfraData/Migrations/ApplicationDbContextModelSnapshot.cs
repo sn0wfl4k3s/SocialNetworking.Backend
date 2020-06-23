@@ -44,7 +44,7 @@ namespace InfraData.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Domain.Entity.File", b =>
+            modelBuilder.Entity("Domain.Entity.FileReference", b =>
                 {
                     b.Property<ulong>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace InfraData.Migrations
                     b.Property<DateTime>("Sended")
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("Size")
+                    b.Property<ulong>("Size")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -161,7 +161,7 @@ namespace InfraData.Migrations
                         .HasForeignKey("PostId");
                 });
 
-            modelBuilder.Entity("Domain.Entity.File", b =>
+            modelBuilder.Entity("Domain.Entity.FileReference", b =>
                 {
                     b.HasOne("Domain.Entity.Comment", null)
                         .WithMany("Files")

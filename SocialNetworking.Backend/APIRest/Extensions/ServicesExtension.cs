@@ -69,7 +69,7 @@ namespace MyNetwork.WebApi.Extensions
             services.AddTransient<IEntityRepository<User>, UserRepository>();
             services.AddTransient<IEntityRepository<Post>, PostRepository>();
             services.AddTransient<IEntityRepository<Comment>, CommentRepository>();
-            services.AddTransient<IEntityRepository<Domain.Entity.File>, FileRepository>();
+            services.AddTransient<IEntityRepository<FileReference>, FileReferenceRepository>();
 
             return services;
         }

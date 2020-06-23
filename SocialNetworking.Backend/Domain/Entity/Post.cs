@@ -11,7 +11,7 @@ namespace Domain.Entity
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public virtual User Author { get; set; }
-        public virtual IEnumerable<File> Files { get; set; }
+        public virtual IEnumerable<FileReference> Files { get; set; }
         public virtual IEnumerable<Comment> Comments { get; set; }
     }
 }

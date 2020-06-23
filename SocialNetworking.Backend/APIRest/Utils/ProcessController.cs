@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace APIRest.Utils
 {
-    public abstract class ProcessController<C> : ControllerBase where C : ControllerBase
+    public abstract class ProcessController<C> : Controller where C : Controller
     {
         private readonly IMediator _mediator;
         private readonly ILogger<C> _logger;

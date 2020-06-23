@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfraData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200606023907_Initial")]
+    [Migration("20200623201642_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace InfraData.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Domain.Entity.File", b =>
+            modelBuilder.Entity("Domain.Entity.FileReference", b =>
                 {
                     b.Property<ulong>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace InfraData.Migrations
                     b.Property<DateTime>("Sended")
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("Size")
+                    b.Property<ulong>("Size")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -163,7 +163,7 @@ namespace InfraData.Migrations
                         .HasForeignKey("PostId");
                 });
 
-            modelBuilder.Entity("Domain.Entity.File", b =>
+            modelBuilder.Entity("Domain.Entity.FileReference", b =>
                 {
                     b.HasOne("Domain.Entity.Comment", null)
                         .WithMany("Files")

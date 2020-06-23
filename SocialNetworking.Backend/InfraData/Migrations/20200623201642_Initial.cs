@@ -85,7 +85,7 @@ namespace InfraData.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false),
                     Path = table.Column<string>(nullable: false),
-                    Size = table.Column<long>(nullable: false),
+                    Size = table.Column<ulong>(nullable: false),
                     Sended = table.Column<DateTime>(nullable: false),
                     FileType = table.Column<int>(nullable: false),
                     OwnerId = table.Column<ulong>(nullable: true),

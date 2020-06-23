@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace InfraData.Mapping
 {
-    public class FileMap : IEntityTypeConfiguration<File>
+    public class FileReferenceMap : IEntityTypeConfiguration<FileReference>
     {
-        public void Configure(EntityTypeBuilder<File> builder)
+        public void Configure(EntityTypeBuilder<FileReference> builder)
         {
             builder.HasKey(e => e.Id);
 

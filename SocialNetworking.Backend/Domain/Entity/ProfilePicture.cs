@@ -6,6 +6,6 @@ namespace Domain.Entity
     {
         public ulong Id { get; set; }
         public virtual User User { get; set; }
-        public virtual File File { get; set; }
+        public virtual FileReference File { get; set; }
     }
 }
