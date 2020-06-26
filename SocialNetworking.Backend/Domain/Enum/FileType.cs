@@ -2,9 +2,11 @@
 {
     public enum FileType
     {
-        DOCUMENT,
+        TEXT,
         IMAGE,
         VIDEO,
-        GIF
+        GIF,
+        AUDIO,
+        UNKNOWN
     }
 }

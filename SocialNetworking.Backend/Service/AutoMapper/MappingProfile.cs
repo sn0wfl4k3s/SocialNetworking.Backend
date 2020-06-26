@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entity;
+using Domain.ViewModels.Post;
 using Service.Mediator.V1.AccountCase.Register;
 
 namespace Service.AutoMapper
@@ -15,8 +16,8 @@ namespace Service.AutoMapper
 
             //CreateMap<User, UserResponse>();
 
-            //CreateMap<Post, PostResponse>()
-            //    .ForMember(dest => dest.Username, options => options.MapFrom(src => src.Author.Username));
+            CreateMap<PostRequest, Post>();
+            CreateMap<Post, PostResponse>();
 
             //CreateMap<Comment, CommentResponse>()
             //    .ForMember(dest => dest.Username, options => options.MapFrom(src => src.Author.Username));

@@ -3,6 +3,7 @@ using Core.Domain;
 using Core.Service;
 using Core.Service.Handlers;
 using Core.Service.Requests;
+using CrossCutting.File;
 using Domain.Entity;
 using Domain.ViewModels.Post;
 using System;
@@ -14,11 +15,13 @@ namespace Service.Mediator.V1.PostCase.Crud
     public class CriarPostHandler : ICriarHandler<PostRequest, PostResponse>
     {
         private readonly IEntityRepository<Post> _repository;
+        private readonly IFileService _fileService;
         private readonly IMapper _mapper;
 
-        public CriarPostHandler(IEntityRepository<Post> repository, IMapper mapper)
+        public CriarPostHandler(IEntityRepository<Post> repository, IFileService fileService, IMapper mapper)
         {
             _repository = repository;
+            _fileService = fileService;
             _mapper = mapper;
         }
 
@@ -28,11 +31,15 @@ namespace Service.Mediator.V1.PostCase.Crud
 
             try
             {
+                var taskFiles = _fileService.SaveFilesAsync(request.Entidade.Files, request.User);
+                
                 var post = _mapper.Map<PostRequest, Post>(request.Entidade);
 
                 post.Author = request.User;
 
-                
+                post.Files = await taskFiles;
+
+                post.Created = DateTime.Now;
 
                 var postCriado = await _repository.CriarEntidadeAsync(post);
 

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using APIRest.Utils;
+using System.Linq;
 
 namespace WebAPI.Features.V1.Controllers
 {
@@ -24,6 +25,23 @@ namespace WebAPI.Features.V1.Controllers
     {
         public PostController(IMediator mediator, ILogger<PostController> logger, IAuthenticationService authentication) : base(mediator, logger, authentication)
         {
+        }
+
+        [HttpPost]
+        [Route("test")]
+        [AllowAnonymous]
+        public IActionResult Test (List<IFormFile> files)
+        {
+
+            var aas = 1456456;
+
+            var arquivos = files;
+
+            var tamanho = arquivos.Sum(f => f.Length);
+
+            aas += 1;
+
+            return Ok();
         }
 
         /// <summary>
@@ -61,9 +79,9 @@ namespace WebAPI.Features.V1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Response<>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Insert(PostRequest post)
+        public async Task<IActionResult> Insert([FromForm]PostRequest post)
             => await IdentifyUserAndProcess(new CriarRequest<PostRequest, PostResponse> { Entidade = post });
 
 
@@ -76,7 +94,7 @@ namespace WebAPI.Features.V1.Controllers
         [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(PostRequest post)
+        public async Task<IActionResult> Update([FromForm]PostRequest post)
             => await IdentifyUserAndProcess(new AtualizarRequest<PostRequest, PostResponse> { Entidade = post });
 
 

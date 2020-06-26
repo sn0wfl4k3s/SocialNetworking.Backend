@@ -1,4 +1,5 @@
 ﻿using Domain.Entity;
+using Domain.ViewModels.Comment;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,6 @@ namespace Domain.ViewModels.Post
         public string Username { get; set; }
         public DateTime Created { get; set; }
         public virtual IEnumerable<FileReference> Files { get; set; }
-        public virtual IEnumerable<Comment> Comments { get; set; }
+        public virtual IEnumerable<CommentResponse> Comments { get; set; }
     }
 }

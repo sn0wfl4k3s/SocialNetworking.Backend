@@ -22,6 +22,7 @@ using System.Text;
 using CrossCutting.Configuration;
 using CrossCutting.Authentication;
 using CrossCutting.Account;
+using CrossCutting.File;
 
 namespace MyNetwork.WebApi.Extensions
 {
@@ -79,6 +80,7 @@ namespace MyNetwork.WebApi.Extensions
             services.AddScoped<ICryptService, CryptService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IFileService, FileService>();
 
             return services;
         }
