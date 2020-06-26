@@ -27,22 +27,6 @@ namespace WebAPI.Features.V1.Controllers
         {
         }
 
-        [HttpPost]
-        [Route("test")]
-        [AllowAnonymous]
-        public IActionResult Test (List<IFormFile> files)
-        {
-
-            var aas = 1456456;
-
-            var arquivos = files;
-
-            var tamanho = arquivos.Sum(f => f.Length);
-
-            aas += 1;
-
-            return Ok();
-        }
 
         /// <summary>
         /// Lista todos os post de um usuário. Caso não seja passado o username será considerado 

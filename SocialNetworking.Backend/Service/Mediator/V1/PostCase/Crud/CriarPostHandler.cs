@@ -37,7 +37,7 @@ namespace Service.Mediator.V1.PostCase.Crud
 
                 post.Author = request.User;
 
-                post.Files = await taskFiles;
+                post.FileReferences = await taskFiles;
 
                 post.Created = DateTime.Now;
 

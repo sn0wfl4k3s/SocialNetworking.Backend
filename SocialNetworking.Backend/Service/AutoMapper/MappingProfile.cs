@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entity;
+using Domain.ViewModels.Comment;
 using Domain.ViewModels.Post;
 using Service.Mediator.V1.AccountCase.Register;
 
@@ -12,15 +13,21 @@ namespace Service.AutoMapper
             CreateMap<RegisterUserCommand, User>();
 
             CreateMap<User, RegisterUserVM>();
-            //CreateMap<User, LoginUserVM>();
+
+            //CreateMap<User, LoginUserVM>();s
 
             //CreateMap<User, UserResponse>();
 
             CreateMap<PostRequest, Post>();
-            CreateMap<Post, PostResponse>();
 
-            //CreateMap<Comment, CommentResponse>()
-            //    .ForMember(dest => dest.Username, options => options.MapFrom(src => src.Author.Username));
+            CreateMap<Post, PostResponse>()
+                .ForMember(dest => dest.Username, options => options.MapFrom(src => src.Author.Username))
+                ;
+
+            CreateMap<CommentResponse, Comment>();
+
+            CreateMap<Comment, CommentResponse>()
+                ;
 
 
             //CreateMap<UserAuthenticated, LoginUserVM>()
@@ -28,10 +35,7 @@ namespace Service.AutoMapper
             //    .ForMember(dest => dest.Expires_in, options => options.MapFrom(src => src.Expires))
             //    .ForMember(dest => dest.Token_type, options => options.MapFrom(src => src.Type));
 
-            //CreateMap<PostRequest, Post>();
-            //CreateMap<CommentRequest, Comment>();
 
-            //.ForMember(dest => dest.User.Username, options => options.MapFrom(src => src.Username));
 
             //Mapper.AssertConfigurationIsValid(); //Is OK!
         }

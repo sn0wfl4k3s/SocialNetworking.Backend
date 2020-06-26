@@ -68,10 +68,10 @@ namespace CrossCutting.File
             var fileType = file switch
             {
                 var f when Path.GetExtension(f.FileName).Equals(".gif", StringComparison.InvariantCultureIgnoreCase) => FileType.GIF,
-                var f when f.ContentType.Contains("Image", StringComparison.InvariantCulture) => FileType.IMAGE,
-                var f when f.ContentType.Contains("Video", StringComparison.InvariantCulture) => FileType.VIDEO,
-                var f when f.ContentType.Contains("Text", StringComparison.InvariantCulture) => FileType.TEXT,
-                var f when f.ContentType.Contains("Audio", StringComparison.InvariantCulture) => FileType.AUDIO,
+                var f when f.ContentType.Contains("image", StringComparison.InvariantCultureIgnoreCase) => FileType.IMAGE,
+                var f when f.ContentType.Contains("video", StringComparison.InvariantCultureIgnoreCase) => FileType.VIDEO,
+                var f when f.ContentType.Contains("text", StringComparison.InvariantCultureIgnoreCase) => FileType.TEXT,
+                var f when f.ContentType.Contains("audio", StringComparison.InvariantCultureIgnoreCase) => FileType.AUDIO,
                 _ => FileType.UNKNOWN
             };
 

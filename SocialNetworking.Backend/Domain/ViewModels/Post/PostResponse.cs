@@ -12,7 +12,7 @@ namespace Domain.ViewModels.Post
         public string Description { get; set; }
         public string Username { get; set; }
         public DateTime Created { get; set; }
-        public virtual IEnumerable<FileReference> Files { get; set; }
+        public virtual IEnumerable<FileReference> FileReferences { get; set; }
         public virtual IEnumerable<CommentResponse> Comments { get; set; }
     }
 }

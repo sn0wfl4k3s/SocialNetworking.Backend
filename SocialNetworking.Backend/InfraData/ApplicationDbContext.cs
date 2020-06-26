@@ -12,7 +12,7 @@ namespace InfraData
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<FileReference> Files { get; set; }
+        public virtual DbSet<FileReference> FileReferences { get; set; }
 
         // ~ Migrations ~
         // In Console:
