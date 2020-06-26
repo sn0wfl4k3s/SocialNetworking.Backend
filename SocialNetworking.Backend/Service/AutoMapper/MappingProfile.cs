@@ -14,10 +14,6 @@ namespace Service.AutoMapper
 
             CreateMap<User, RegisterUserVM>();
 
-            //CreateMap<User, LoginUserVM>();s
-
-            //CreateMap<User, UserResponse>();
-
             CreateMap<PostRequest, Post>();
 
             CreateMap<Post, PostResponse>()
@@ -26,15 +22,7 @@ namespace Service.AutoMapper
 
             CreateMap<CommentResponse, Comment>();
 
-            CreateMap<Comment, CommentResponse>()
-                ;
-
-
-            //CreateMap<UserAuthenticated, LoginUserVM>()
-            //    .ForMember(dest => dest.Access_token, options => options.MapFrom(src => src.Token))
-            //    .ForMember(dest => dest.Expires_in, options => options.MapFrom(src => src.Expires))
-            //    .ForMember(dest => dest.Token_type, options => options.MapFrom(src => src.Type));
-
+            CreateMap<Comment, CommentResponse>();
 
 
             //Mapper.AssertConfigurationIsValid(); //Is OK!
