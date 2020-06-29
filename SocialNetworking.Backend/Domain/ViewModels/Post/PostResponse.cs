@@ -1,5 +1,5 @@
-﻿using Domain.Entity;
-using Domain.ViewModels.Comment;
+﻿using Domain.ViewModels.Comment;
+using Domain.ViewModels.FileReference;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +12,7 @@ namespace Domain.ViewModels.Post
         public string Description { get; set; }
         public string Username { get; set; }
         public DateTime Created { get; set; }
-        public virtual IEnumerable<FileReference> FileReferences { get; set; }
+        public virtual IEnumerable<FileReferenceResponse> FileReferences { get; set; }
         public virtual IEnumerable<CommentResponse> Comments { get; set; }
     }
 }

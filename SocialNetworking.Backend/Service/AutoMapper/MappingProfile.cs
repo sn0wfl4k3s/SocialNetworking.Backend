@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Entity;
 using Domain.ViewModels.Comment;
+using Domain.ViewModels.FileReference;
 using Domain.ViewModels.Post;
 using Service.Mediator.V1.AccountCase.Register;
 
@@ -23,6 +24,9 @@ namespace Service.AutoMapper
             CreateMap<CommentResponse, Comment>();
 
             CreateMap<Comment, CommentResponse>();
+
+
+            CreateMap<FileReference, FileReferenceResponse>();
 
 
             //Mapper.AssertConfigurationIsValid(); //Is OK!

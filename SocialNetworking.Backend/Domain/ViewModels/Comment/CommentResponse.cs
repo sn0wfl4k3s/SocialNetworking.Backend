@@ -1,4 +1,4 @@
-﻿using Domain.Entity;
+﻿using Domain.ViewModels.FileReference;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +9,6 @@ namespace Domain.ViewModels.Comment
         public ulong Id { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
-        public virtual IEnumerable<FileReference> FileReferences { get; set; }
+        public virtual IEnumerable<FileReferenceResponse> FileReferences { get; set; }
     }
 }
