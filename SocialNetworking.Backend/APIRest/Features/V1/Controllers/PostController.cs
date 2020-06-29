@@ -31,7 +31,7 @@ namespace WebAPI.Features.V1.Controllers
         /// List all posts for a user. If the username is not passed, the posts of the user who made 
         /// the request will be considered.
         /// </summary>
-        /// <param name="username">Username do usuário</param>
+        /// <param name="username"></param>
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)]
@@ -44,7 +44,7 @@ namespace WebAPI.Features.V1.Controllers
         /// <summary>
         /// Get a post by Id.
         /// </summary>
-        /// <param name="id">ID do post</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
