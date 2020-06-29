@@ -31,14 +31,11 @@ namespace Service.Mediator.V1.PostCase.Crud
 
             try
             {
-                var query = _repository.ObterQueryEntidade().AsNoTracking();
+                var username = string.IsNullOrEmpty(request.Parameter) ? request.User.Username : request.Parameter;
 
-                if (!string.IsNullOrEmpty(request.Parameter))
-                {
-                    query = query.Where(p => p.User.Username == request.Parameter);
-                }
+                var lista = _repository.ObterQueryEntidade().AsNoTracking().Where(p => p.User.Username == username).ToListAsync();
 
-                var response = _mapper.Map<IEnumerable<PostResponse>>(query.ToList());
+                var response = _mapper.Map<IEnumerable<PostResponse>>(await lista);
 
                 return await Task.FromResult(new Response<IEnumerable<PostResponse>>(response));
             }
