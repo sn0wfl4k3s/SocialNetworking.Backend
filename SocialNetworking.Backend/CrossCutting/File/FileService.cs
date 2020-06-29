@@ -23,8 +23,10 @@ namespace CrossCutting.File
             _repository = repository;
         }
 
-        public async Task<FileReference> SaveFileAsync(IFormFile file, User owner)
+        public async Task<FileReference> SaveFileAsync(IFormFile file, User user)
         {
+            var fileType = IdentifyFileType(file);
+
             var directory = string.Concat(_hostingEnvironment.WebRootPath, Folder);
 
             var extension = Path.GetExtension(file.FileName);
@@ -35,21 +37,21 @@ namespace CrossCutting.File
 
             await using var fileStream = new FileStream(filepath, FileMode.Create);
 
-            await file.CopyToAsync(fileStream);
-
             var fileReference = new FileReference
             {
+                User = user,
                 Name = fileName,
                 Size = file.Length,
-                Owner = owner,
                 Sended = DateTime.Now,
                 Path = Path.Combine(Folder, fileName),
-                FileType = IdentifyFileType(file)
+                FileType = fileType
             };
 
-            var resultado = await _repository.CriarEntidadeAsync(fileReference);
+            var resultado = _repository.CriarEntidadeAsync(fileReference);
+            
+            await file.CopyToAsync(fileStream);
 
-            return await Task.FromResult(resultado);
+            return await Task.FromResult(await resultado);
         }
 
 
@@ -57,8 +59,12 @@ namespace CrossCutting.File
         {
             var fileReferences = new List<FileReference>();
 
-            foreach (var file in files)
-                fileReferences.Add(await SaveFileAsync(file, user));
+            if (files != null)
+            {
+                foreach (var file in files)
+                    fileReferences.Add(await SaveFileAsync(file, user));
+            }
+
 
             return await Task.FromResult(fileReferences);
         }
@@ -67,7 +73,7 @@ namespace CrossCutting.File
         {
             var fileType = file switch
             {
-                var f when Path.GetExtension(f.FileName).Equals(".gif", StringComparison.InvariantCultureIgnoreCase) => FileType.GIF,
+                var f when ".gif".Equals(Path.GetExtension(f.FileName), StringComparison.InvariantCultureIgnoreCase) => FileType.GIF,
                 var f when f.ContentType.Contains("image", StringComparison.InvariantCultureIgnoreCase) => FileType.IMAGE,
                 var f when f.ContentType.Contains("video", StringComparison.InvariantCultureIgnoreCase) => FileType.VIDEO,
                 var f when f.ContentType.Contains("text", StringComparison.InvariantCultureIgnoreCase) => FileType.TEXT,

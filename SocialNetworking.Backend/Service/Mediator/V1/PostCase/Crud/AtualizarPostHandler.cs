@@ -30,7 +30,7 @@ namespace Service.Mediator.V1.PostCase.Crud
             {
                 var post = _mapper.Map<PostRequest, Post>(request.Entidade);
 
-                post.Author = request.User;
+                post.User = request.User;
 
                 var postCriado = await _repository.AtualizarEntidadeAsync(post);
 

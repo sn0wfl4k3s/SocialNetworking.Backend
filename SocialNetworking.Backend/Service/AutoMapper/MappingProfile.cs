@@ -17,7 +17,7 @@ namespace Service.AutoMapper
             CreateMap<PostRequest, Post>();
 
             CreateMap<Post, PostResponse>()
-                .ForMember(dest => dest.Username, options => options.MapFrom(src => src.Author.Username))
+                .ForMember(dest => dest.Username, options => options.MapFrom(src => src.User.Username))
                 ;
 
             CreateMap<CommentResponse, Comment>();

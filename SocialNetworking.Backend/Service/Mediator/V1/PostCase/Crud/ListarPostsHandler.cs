@@ -35,7 +35,7 @@ namespace Service.Mediator.V1.PostCase.Crud
 
                 if (!string.IsNullOrEmpty(request.Parameter))
                 {
-                    query = query.Where(p => p.Author.Username == request.Parameter);
+                    query = query.Where(p => p.User.Username == request.Parameter);
                 }
 
                 var response = _mapper.Map<IEnumerable<PostResponse>>(query.ToList());

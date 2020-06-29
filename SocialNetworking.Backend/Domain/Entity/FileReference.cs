@@ -12,6 +12,6 @@ namespace Domain.Entity
         public long Size { get; set; }
         public DateTime Sended { get; set; }
         public FileType FileType { get; set; }
-        public virtual User Owner { get; set; }
+        public virtual User User { get; set; }
     }
 }

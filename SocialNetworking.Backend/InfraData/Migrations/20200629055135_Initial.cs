@@ -33,20 +33,20 @@ namespace InfraData.Migrations
                 {
                     Id = table.Column<ulong>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<ulong>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    AuthorId = table.Column<ulong>(nullable: true)
+                    Created = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_Users_AuthorId",
-                        column: x => x.AuthorId,
+                        name: "FK_Posts_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,22 +57,22 @@ namespace InfraData.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Description = table.Column<string>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    PostId = table.Column<ulong>(nullable: true),
-                    AuthorId = table.Column<ulong>(nullable: true)
+                    UserId = table.Column<ulong>(nullable: true),
+                    PostId = table.Column<ulong>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Users_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -88,7 +88,7 @@ namespace InfraData.Migrations
                     Size = table.Column<long>(nullable: false),
                     Sended = table.Column<DateTime>(nullable: false),
                     FileType = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<ulong>(nullable: true),
+                    UserId = table.Column<ulong>(nullable: true),
                     CommentId = table.Column<ulong>(nullable: true),
                     PostId = table.Column<ulong>(nullable: true)
                 },
@@ -102,23 +102,18 @@ namespace InfraData.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FileReferences_Users_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_FileReferences_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FileReferences_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_AuthorId",
-                table: "Comments",
-                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
@@ -126,14 +121,14 @@ namespace InfraData.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FileReferences_CommentId",
                 table: "FileReferences",
                 column: "CommentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FileReferences_OwnerId",
-                table: "FileReferences",
-                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FileReferences_PostId",
@@ -141,9 +136,14 @@ namespace InfraData.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_AuthorId",
+                name: "IX_FileReferences_UserId",
+                table: "FileReferences",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_UserId",
                 table: "Posts",
-                column: "AuthorId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

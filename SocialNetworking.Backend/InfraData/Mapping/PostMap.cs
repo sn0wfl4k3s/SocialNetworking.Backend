@@ -9,7 +9,9 @@ namespace InfraData.Mapping
         public void Configure(EntityTypeBuilder<Post> builder)
         {
             builder.HasKey(e => e.Id);
-            
+
+            builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
+
             builder.Property(e => e.Description).IsRequired();
         }
     }

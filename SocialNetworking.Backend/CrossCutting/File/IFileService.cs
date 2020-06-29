@@ -8,7 +8,7 @@ namespace CrossCutting.File
 {
     public interface IFileService
     {
-        Task<FileReference> SaveFileAsync(IFormFile file, User owner);
+        Task<FileReference> SaveFileAsync(IFormFile file, User user);
         Task<IEnumerable<FileReference>> SaveFilesAsync(IEnumerable<IFormFile> files, User user);
         FileType IdentifyFileType(IFormFile file);
     }

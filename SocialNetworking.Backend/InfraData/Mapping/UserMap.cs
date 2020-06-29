@@ -10,6 +10,8 @@ namespace InfraData.Mapping
         {
             builder.HasKey(e => e.Id);
 
+            builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
+
             builder.Property(e => e.Name).IsRequired();
 
             builder.Property(e => e.Email).IsRequired();

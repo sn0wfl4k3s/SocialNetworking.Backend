@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfraData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200626213744_Initial")]
+    [Migration("20200629055135_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,6 @@ namespace InfraData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<ulong?>("AuthorId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
@@ -37,11 +34,14 @@ namespace InfraData.Migrations
                     b.Property<ulong?>("PostId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<ulong?>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -62,9 +62,6 @@ namespace InfraData.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<ulong?>("OwnerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -78,13 +75,16 @@ namespace InfraData.Migrations
                     b.Property<long>("Size")
                         .HasColumnType("INTEGER");
 
+                    b.Property<ulong?>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CommentId");
 
-                    b.HasIndex("OwnerId");
-
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("FileReferences");
                 });
@@ -93,9 +93,6 @@ namespace InfraData.Migrations
                 {
                     b.Property<ulong>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<ulong?>("AuthorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Created")
@@ -108,9 +105,12 @@ namespace InfraData.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
+                    b.Property<ulong>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -154,35 +154,37 @@ namespace InfraData.Migrations
 
             modelBuilder.Entity("Domain.Entity.Comment", b =>
                 {
-                    b.HasOne("Domain.Entity.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
-                    b.HasOne("Domain.Entity.Post", "Post")
+                    b.HasOne("Domain.Entity.Post", null)
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
+
+                    b.HasOne("Domain.Entity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Domain.Entity.FileReference", b =>
                 {
                     b.HasOne("Domain.Entity.Comment", null)
-                        .WithMany("Files")
+                        .WithMany("FileReferences")
                         .HasForeignKey("CommentId");
-
-                    b.HasOne("Domain.Entity.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
 
                     b.HasOne("Domain.Entity.Post", null)
                         .WithMany("FileReferences")
                         .HasForeignKey("PostId");
+
+                    b.HasOne("Domain.Entity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Domain.Entity.Post", b =>
                 {
-                    b.HasOne("Domain.Entity.User", "Author")
+                    b.HasOne("Domain.Entity.User", "User")
                         .WithMany()
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

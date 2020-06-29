@@ -66,7 +66,7 @@ namespace CrossCutting.Authentication
 
             var username = jwt.Claims.First(c => c.Type == "unique_name").Value;
 
-            var user = _repository.ObterQueryEntidade().AsNoTracking().FirstOrDefault(u => u.Username == username);
+            var user = _repository.ObterQueryEntidade().FirstOrDefault(u => u.Username == username);
 
             return user;
         }

@@ -30,13 +30,13 @@ namespace InfraData.Core
         {
             using var transaction = _context.Database.BeginTransaction();
 
-            var resultado = await _context.Set<T>().AddAsync(entidade);
+            var resultado = _context.Set<T>().AddAsync(entidade);
 
             await _context.SaveChangesAsync();
 
             await transaction.CommitAsync();
 
-            return await Task.FromResult(resultado.Entity);
+            return await Task.FromResult((await resultado).Entity);
         }
 
         public virtual IQueryable<T> ObterQueryEntidade()

@@ -7,10 +7,11 @@ namespace Domain.Entity
     public class Post : IEntity
     {
         public ulong Id { get; set; }
+        public ulong UserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
-        public virtual User Author { get; set; }
+        public virtual User User { get; set; }
         public virtual IEnumerable<FileReference> FileReferences { get; set; }
         public virtual IEnumerable<Comment> Comments { get; set; }
     }
