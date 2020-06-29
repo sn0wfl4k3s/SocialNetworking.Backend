@@ -28,7 +28,7 @@ namespace WebAPI
 
             services.AddConfigurations(Configuration);
 
-            services.AddAuthSwagger("SocialNetworking API");
+            services.AddAuthSwagger("SN API");
 
             services.AddLibrarys();
 
