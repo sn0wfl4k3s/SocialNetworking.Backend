@@ -1,4 +1,5 @@
-﻿using Core.Service;
+﻿using APIRest.Utils;
+using Core.Service;
 using Core.Service.Requests;
 using CrossCutting.Authentication;
 using CrossCutting.Constants;
@@ -11,8 +12,6 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using APIRest.Utils;
-using System.Linq;
 
 namespace WebAPI.Features.V1.Controllers
 {
@@ -29,8 +28,8 @@ namespace WebAPI.Features.V1.Controllers
 
 
         /// <summary>
-        /// Lista todos os post de um usuário. Caso não seja passado o username será considerado 
-        /// os posts do próprio usuário que fez a requisição.
+        /// List all posts for a user. If the username is not passed, the posts of the user who made 
+        /// the request will be considered.
         /// </summary>
         /// <param name="username">Username do usuário</param>
         /// <returns></returns>
@@ -43,7 +42,7 @@ namespace WebAPI.Features.V1.Controllers
 
 
         /// <summary>
-        /// Obtém um post através do ID
+        /// Get a post by Id.
         /// </summary>
         /// <param name="id">ID do post</param>
         /// <returns></returns>
@@ -57,7 +56,7 @@ namespace WebAPI.Features.V1.Controllers
 
 
         /// <summary>
-        /// Cria um novo post.
+        /// Create a new post.
         /// </summary>
         /// <param name="post"></param>
         /// <returns></returns>
@@ -65,12 +64,12 @@ namespace WebAPI.Features.V1.Controllers
         [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Insert([FromForm]PostRequest post)
+        public async Task<IActionResult> Insert([FromForm] PostRequest post)
             => await IdentifyUserAndProcess(new CriarRequest<PostRequest, PostResponse> { Entidade = post });
 
 
         /// <summary>
-        /// Atualiza um post já criado.
+        /// Update a post already created.
         /// </summary>
         /// <param name="post"></param>
         /// <returns></returns>
@@ -78,12 +77,12 @@ namespace WebAPI.Features.V1.Controllers
         [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update([FromForm]PostRequest post)
+        public async Task<IActionResult> Update([FromForm] PostRequest post)
             => await IdentifyUserAndProcess(new AtualizarRequest<PostRequest, PostResponse> { Entidade = post });
 
 
         /// <summary>
-        /// Deleta um post já criado.
+        /// Delete a post already created.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
