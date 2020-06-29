@@ -3,8 +3,10 @@ using Core.Domain;
 using Core.Service;
 using Core.Service.Handlers;
 using Core.Service.Requests;
+using CrossCutting.Exceptions;
 using Domain.Entity;
 using Domain.ViewModels.Post;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +30,14 @@ namespace Service.Mediator.V1.PostCase.Crud
 
             try
             {
+                var temAutorizacao = await _repository.ObterQueryEntidade()
+                    .AnyAsync(p => p.Id == request.Id && p.User.Username == request.User.Username && p.Id == request.Entidade.Id);
+
+                if (!temAutorizacao)
+                {
+                    throw new ActionNotPermittedException();
+                }
+
                 var postRemovido = await _repository.RemoverEntidadeAsync(request.Id);
 
                 var response = _mapper.Map<Post, PostResponse>(postRemovido);
