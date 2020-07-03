@@ -10,9 +10,9 @@ namespace Domain.ViewModels.Post
         public ulong Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Username { get; set; }
         public DateTime Created { get; set; }
-        public virtual IEnumerable<FileReferenceResponse> FileReferences { get; set; }
-        public virtual IEnumerable<CommentResponse> Comments { get; set; }
+        public string Username { get; set; }
+        public IEnumerable<FileReferenceResponse> Files { get; set; }
+        public IEnumerable<CommentResponse> Comments { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace Domain.Entity
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public virtual User User { get; set; }
+        public virtual Post Post { get; set; }
         public virtual IEnumerable<FileReference> FileReferences { get; set; }
     }
 }

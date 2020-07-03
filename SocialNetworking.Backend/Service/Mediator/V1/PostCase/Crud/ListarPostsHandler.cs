@@ -4,6 +4,8 @@ using Core.Service;
 using Core.Service.Handlers;
 using Core.Service.Requests;
 using Domain.Entity;
+using Domain.ViewModels.Comment;
+using Domain.ViewModels.FileReference;
 using Domain.ViewModels.Post;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,9 +35,9 @@ namespace Service.Mediator.V1.PostCase.Crud
             {
                 var username = string.IsNullOrEmpty(request.Parameter) ? request.User.Username : request.Parameter;
 
-                var lista = _repository.ObterQueryEntidade().AsNoTracking().Where(p => p.User.Username == username).ToListAsync();
+                var lista = _repository.ObterQueryEntidade().Where(p => p.User.Username == username).ToList();
 
-                var response = _mapper.Map<IEnumerable<PostResponse>>(await lista);
+                var response = _mapper.Map<IEnumerable<PostResponse>>(lista);
 
                 return await Task.FromResult(new Response<IEnumerable<PostResponse>>(response));
             }

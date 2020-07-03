@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfraData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200629055135_Initial")]
+    [Migration("20200703184058_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,7 +105,7 @@ namespace InfraData.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<ulong>("UserId")
+                    b.Property<ulong?>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -154,7 +154,7 @@ namespace InfraData.Migrations
 
             modelBuilder.Entity("Domain.Entity.Comment", b =>
                 {
-                    b.HasOne("Domain.Entity.Post", null)
+                    b.HasOne("Domain.Entity.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
 
@@ -182,9 +182,7 @@ namespace InfraData.Migrations
                 {
                     b.HasOne("Domain.Entity.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -33,9 +33,9 @@ namespace Service.Mediator.V1.CommentCase.Crud
             {
                 var username = string.IsNullOrEmpty(request.Parameter) ? request.User.Username : request.Parameter;
 
-                var lista = _repository.ObterQueryEntidade().AsNoTracking().Where(c => c.User.Username == username).ToListAsync();
+                var lista = _repository.ObterQueryEntidade().Where(c => c.User.Username == username).ToList();
 
-                var response = _mapper.Map<IEnumerable<CommentResponse>>(await lista);
+                var response = _mapper.Map<IEnumerable<CommentResponse>>(lista);
 
                 return await Task.FromResult(new Response<IEnumerable<CommentResponse>>(response));
             }

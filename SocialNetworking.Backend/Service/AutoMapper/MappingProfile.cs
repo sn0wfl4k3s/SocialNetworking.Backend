@@ -15,18 +15,19 @@ namespace Service.AutoMapper
 
             CreateMap<User, RegisterUserVM>();
 
-            CreateMap<PostRequest, Post>();
-
-            CreateMap<Post, PostResponse>()
-                .ForMember(dest => dest.Username, options => options.MapFrom(src => src.User.Username))
-                ;
-
-            CreateMap<CommentResponse, Comment>();
+            CreateMap<CommentRequest, Comment>();
 
             CreateMap<Comment, CommentResponse>();
 
-
             CreateMap<FileReference, FileReferenceResponse>();
+
+            CreateMap<Post, PostResponse>()
+                .ForMember(dest => dest.Files, s => s.Condition(so => so != null))
+                .ForMember(dest => dest.Comments, s => s.Condition(so => so != null))
+                .ForMember(dest => dest.Username, s => s.Condition(so => so != null))
+                .ForMember(dest => dest.Username, options => options.MapFrom(src => src.User.Username))
+                .ForMember(dest => dest.Files, options => options.MapFrom(src => src.FileReferences))
+                ;
 
 
             //Mapper.AssertConfigurationIsValid(); //Is OK!
