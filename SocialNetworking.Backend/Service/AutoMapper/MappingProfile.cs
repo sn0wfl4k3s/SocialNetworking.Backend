@@ -15,11 +15,16 @@ namespace Service.AutoMapper
 
             CreateMap<User, RegisterUserVM>();
 
+            
             CreateMap<CommentRequest, Comment>();
 
             CreateMap<Comment, CommentResponse>();
 
+            
             CreateMap<FileReference, FileReferenceResponse>();
+
+            
+            CreateMap<PostRequest, Post>();
 
             CreateMap<Post, PostResponse>()
                 .ForMember(dest => dest.Files, s => s.Condition(so => so != null))

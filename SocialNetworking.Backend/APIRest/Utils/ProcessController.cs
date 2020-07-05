@@ -25,7 +25,11 @@ namespace APIRest.Utils
 
         protected virtual async Task<IActionResult> IdentifyUserAndProcess<T>(IRequestUser<T> command)
         {
-            var token = Request.Headers["Authorization"].First().Split(" ").Last();
+            var token = Request.Headers["Authorization"]
+                .First()
+                .Trim()
+                .Split(" ")
+                .Last();
 
             command.User = _authentication.GetUserByToken(token);
 

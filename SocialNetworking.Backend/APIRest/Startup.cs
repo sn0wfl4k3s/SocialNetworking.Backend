@@ -30,8 +30,6 @@ namespace WebAPI
 
             services.AddAuthSwagger("SN API");
 
-            services.AddLibrarys();
-
             services.AddServices();
 
             services.AddRepositorys();
@@ -39,6 +37,10 @@ namespace WebAPI
             services.AddVersionamentoApi();
 
             services.AddJwtAuthentication();
+            
+            services.AddAutoMapper();
+
+            services.AddMediatorWithValidations();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

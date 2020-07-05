@@ -1,7 +1,16 @@
 ﻿using AutoMapper;
 using Core.Domain;
+using Core.Service;
+using Core.Service.Requests;
+using Core.Service.Validations;
+using CrossCutting.Account;
+using CrossCutting.Authentication;
+using CrossCutting.Configuration;
+using CrossCutting.File;
 using CrossCutting.Security;
 using Domain.Entity;
+using Domain.ViewModels.Comment;
+using FluentValidation;
 using InfraData.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,16 +22,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Service.Mediator.V1.AccountCase.Login;
+using Service.Mediator.V1.AccountCase.Register;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using CrossCutting.Configuration;
-using CrossCutting.Authentication;
-using CrossCutting.Account;
-using CrossCutting.File;
 
 namespace MyNetwork.WebApi.Extensions
 {
@@ -85,11 +92,8 @@ namespace MyNetwork.WebApi.Extensions
             return services;
         }
 
-        public static IServiceCollection AddLibrarys(this IServiceCollection services)
+        public static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
-            var assembly = AppDomain.CurrentDomain.Load("Service");
-            services.AddMediatR(assembly);
-
             var assemblies = new List<Assembly>
             {
                 AppDomain.CurrentDomain.Load("Service"),
@@ -97,6 +101,46 @@ namespace MyNetwork.WebApi.Extensions
             };
 
             services.AddAutoMapper(assemblies);
+
+            return services;
+        }
+
+        public static IServiceCollection AddMediator(this IServiceCollection services)
+        {
+            var assembly = AppDomain.CurrentDomain.Load("Service");
+
+            services.AddMediatR(assembly);
+
+            return services;
+        }
+
+        public static IServiceCollection AddMediatorWithValidations(this IServiceCollection services)
+        {
+            var assembly = AppDomain.CurrentDomain.Load("Service");
+
+            services.AddMediatR(assembly);
+
+            AssemblyScanner
+                .FindValidatorsInAssembly(assembly)
+                .ForEach(result => services.AddScoped(result.InterfaceType, result.ValidatorType));
+
+            // Account
+            services.AddValidation<LoginUserCommand, LoginUserVM>();
+            services.AddValidation<RegisterUserCommand, RegisterUserVM>();
+
+            // Comment
+            services.AddValidation<CriarRequest<CommentRequest, CommentResponse>, CommentResponse>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddValidation<TInput, TOutput>(this IServiceCollection services)
+            where TInput : IRequest<Response<TOutput>>
+            where TOutput : class
+        {
+            services.AddScoped(
+                typeof(IPipelineBehavior<TInput, Response<TOutput>>),
+                typeof(FailFastRequestBehavior<TInput, Response<TOutput>, TOutput>));
 
             return services;
         }
