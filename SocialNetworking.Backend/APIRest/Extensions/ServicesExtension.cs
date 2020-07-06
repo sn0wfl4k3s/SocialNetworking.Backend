@@ -10,6 +10,7 @@ using CrossCutting.File;
 using CrossCutting.Security;
 using Domain.Entity;
 using Domain.ViewModels.Comment;
+using Domain.ViewModels.Post;
 using FluentValidation;
 using InfraData.Repository;
 using MediatR;
@@ -130,6 +131,13 @@ namespace MyNetwork.WebApi.Extensions
 
             // Comment
             services.AddValidation<CriarRequest<CommentRequest, CommentResponse>, CommentResponse>();
+            services.AddValidation<AtualizarRequest<CommentRequest, CommentResponse>, CommentResponse>();
+            services.AddValidation<RemoverRequest<CommentRequest, CommentResponse>, CommentResponse>();
+
+            // Post
+            services.AddValidation<CriarRequest<PostRequest, PostResponse>, PostResponse>();
+            services.AddValidation<AtualizarRequest<PostRequest, PostResponse>, PostResponse>();
+            services.AddValidation<RemoverRequest<PostRequest, PostResponse>, PostResponse>();
 
             return services;
         }

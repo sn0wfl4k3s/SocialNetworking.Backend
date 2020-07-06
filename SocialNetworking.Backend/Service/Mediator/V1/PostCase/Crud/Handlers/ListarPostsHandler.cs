@@ -4,17 +4,14 @@ using Core.Service;
 using Core.Service.Handlers;
 using Core.Service.Requests;
 using Domain.Entity;
-using Domain.ViewModels.Comment;
-using Domain.ViewModels.FileReference;
 using Domain.ViewModels.Post;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Service.Mediator.V1.PostCase.Crud
+namespace Service.Mediator.V1.PostCase.Crud.Handlers
 {
     public class ListarPostsHandler : IListarHandler<IEnumerable<PostResponse>>
     {

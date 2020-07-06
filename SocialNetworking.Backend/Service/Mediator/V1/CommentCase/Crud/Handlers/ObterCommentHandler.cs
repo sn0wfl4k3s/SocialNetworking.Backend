@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Service.Mediator.V1.CommentCase.Crud
+namespace Service.Mediator.V1.CommentCase.Crud.Handlers
 {
     public class ObterCommentHandler : IObterHandler<CommentResponse>
     {

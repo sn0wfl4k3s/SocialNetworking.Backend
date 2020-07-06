@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Domain.Entity
 {
-    public class Post : IEntity 
+    public class Post : IEntity
     {
         public ulong Id { get; set; }
         public string Title { get; set; }

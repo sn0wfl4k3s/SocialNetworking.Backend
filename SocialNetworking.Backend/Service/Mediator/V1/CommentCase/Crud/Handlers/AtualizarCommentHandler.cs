@@ -5,28 +5,28 @@ using Core.Service.Handlers;
 using Core.Service.Requests;
 using CrossCutting.Exceptions;
 using Domain.Entity;
-using Domain.ViewModels.Post;
+using Domain.ViewModels.Comment;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Service.Mediator.V1.PostCase.Crud
+namespace Service.Mediator.V1.CommentCase.Crud.Handlers
 {
-    public class AtualizarPostHandler : IAtualizarHandler<PostRequest, PostResponse>
+    public class AtualizarCommentHandler : IAtualizarHandler<CommentRequest, CommentResponse>
     {
-        private readonly IEntityRepository<Post> _repository;
+        private readonly IEntityRepository<Comment> _repository;
         private readonly IMapper _mapper;
 
-        public AtualizarPostHandler(IEntityRepository<Post> repository, IMapper mapper)
+        public AtualizarCommentHandler(IEntityRepository<Comment> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<Response<PostResponse>> Handle(AtualizarRequest<PostRequest, PostResponse> request, CancellationToken cancellationToken)
+        public async Task<Response<CommentResponse>> Handle(AtualizarRequest<CommentRequest, CommentResponse> request, CancellationToken cancellationToken)
         {
-            var error = new Response<PostResponse>();
+            var error = new Response<CommentResponse>();
 
             try
             {
@@ -38,15 +38,15 @@ namespace Service.Mediator.V1.PostCase.Crud
                     throw new ActionNotPermittedException();
                 }
 
-                var post = _mapper.Map<PostRequest, Post>(request.Entidade);
+                var comment = _mapper.Map<CommentRequest, Comment>(request.Entidade);
 
-                post.User = request.User;
+                comment.User = request.User;
 
-                var postCriado = await _repository.AtualizarEntidadeAsync(post);
+                var commentAtualizado = await _repository.AtualizarEntidadeAsync(comment);
 
-                var response = _mapper.Map<Post, PostResponse>(postCriado);
+                var response = _mapper.Map<Comment, CommentResponse>(commentAtualizado);
 
-                return await Task.FromResult(new Response<PostResponse>(response));
+                return await Task.FromResult(new Response<CommentResponse>(response));
             }
             catch (Exception e)
             {

@@ -11,7 +11,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Service.Mediator.V1.PostCase.Crud
+namespace Service.Mediator.V1.PostCase.Crud.Handlers
 {
     public class RemoverPostHandler : IRemoverHandler<PostRequest, PostResponse>
     {

@@ -1,4 +1,5 @@
-﻿using CrossCutting.Authentication;
+﻿using APIRest.Utils;
+using CrossCutting.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,6 @@ using Service.Mediator.V1.AccountCase.Login;
 using Service.Mediator.V1.AccountCase.Register;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using APIRest.Utils;
 
 namespace WebAPI.Features.V1.Controllers
 {

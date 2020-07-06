@@ -1,5 +1,5 @@
 ﻿using Core.Service;
-using Core.Service.Requests.Core;
+using Core.Service.Core;
 using CrossCutting.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

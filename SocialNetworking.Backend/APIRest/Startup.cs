@@ -37,7 +37,7 @@ namespace WebAPI
             services.AddVersionamentoApi();
 
             services.AddJwtAuthentication();
-            
+
             services.AddAutoMapper();
 
             services.AddMediatorWithValidations();

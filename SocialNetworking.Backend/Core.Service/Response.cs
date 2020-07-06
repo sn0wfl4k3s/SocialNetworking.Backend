@@ -13,7 +13,7 @@ namespace Core.Service
         public Response() => Errors = new ReadOnlyDictionary<string, List<string>>(_messages);
 
         public Response(T result) : this() => Result = result;
-        
+
         public bool HasError() => _messages.Keys.Count > 0;
 
         public Response<T> AddError(string key, string message)

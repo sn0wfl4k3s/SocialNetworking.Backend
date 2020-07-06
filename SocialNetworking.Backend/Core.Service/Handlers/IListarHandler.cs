@@ -1,5 +1,5 @@
-﻿using MediatR;
-using Core.Service.Requests;
+﻿using Core.Service.Requests;
+using MediatR;
 
 namespace Core.Service.Handlers
 {

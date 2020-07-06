@@ -1,7 +1,7 @@
 ﻿using Domain.Entity;
 using MediatR;
 
-namespace Core.Service.Requests.Core
+namespace Core.Service.Core
 {
     public interface IRequestUser<TResponse> : IRequest<Response<TResponse>>
     {

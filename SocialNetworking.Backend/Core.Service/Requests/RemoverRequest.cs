@@ -1,9 +1,9 @@
-﻿using Core.Service.Requests.Core;
+﻿using Core.Service.Core;
 using Domain.Entity;
 
 namespace Core.Service.Requests
 {
-    public class RemoverRequest<TRequest, TResponse> : IRequestUser<TResponse>
+    public class RemoverRequest<TRequest, TResponse> : IUserCommandRequest<TRequest, TResponse>
     {
         public User User { get; set; }
         public TRequest Entidade { get; set; }

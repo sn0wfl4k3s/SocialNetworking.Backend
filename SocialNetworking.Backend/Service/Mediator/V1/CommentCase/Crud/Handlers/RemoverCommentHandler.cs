@@ -1,19 +1,17 @@
-﻿using Core.Service.Handlers;
+﻿using AutoMapper;
+using Core.Domain;
+using Core.Service;
+using Core.Service.Handlers;
+using Core.Service.Requests;
+using CrossCutting.Exceptions;
+using Domain.Entity;
 using Domain.ViewModels.Comment;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Service;
-using Core.Service.Requests;
-using System.Threading;
-using Domain.Entity;
-using Core.Domain;
-using AutoMapper;
-using CrossCutting.Exceptions;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Service.Mediator.V1.CommentCase.Crud
+namespace Service.Mediator.V1.CommentCase.Crud.Handlers
 {
     public class RemoverCommentHandler : IRemoverHandler<CommentRequest, CommentResponse>
     {

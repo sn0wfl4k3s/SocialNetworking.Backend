@@ -5,14 +5,13 @@ using Core.Service.Handlers;
 using Core.Service.Requests;
 using Domain.Entity;
 using Domain.ViewModels.Comment;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Service.Mediator.V1.CommentCase.Crud
+namespace Service.Mediator.V1.CommentCase.Crud.Handlers
 {
     public class ListarCommentsHandler : IListarHandler<IEnumerable<CommentResponse>>
     {

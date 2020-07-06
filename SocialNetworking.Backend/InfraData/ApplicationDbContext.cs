@@ -1,6 +1,6 @@
 ﻿using Domain.Entity;
-using Microsoft.EntityFrameworkCore;
 using InfraData.Mapping;
+using Microsoft.EntityFrameworkCore;
 
 namespace InfraData
 {

@@ -48,7 +48,7 @@ namespace CrossCutting.File
             };
 
             var resultado = _repository.CriarEntidadeAsync(fileReference);
-            
+
             await file.CopyToAsync(fileStream);
 
             return await Task.FromResult(await resultado);

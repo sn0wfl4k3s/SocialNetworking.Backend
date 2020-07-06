@@ -1,4 +1,4 @@
-﻿using Core.Service.Requests.Core;
+﻿using Core.Service.Core;
 using Domain.Entity;
 
 namespace Core.Service.Requests

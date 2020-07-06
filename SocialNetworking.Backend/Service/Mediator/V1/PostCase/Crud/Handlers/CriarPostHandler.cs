@@ -10,7 +10,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Service.Mediator.V1.PostCase.Crud
+namespace Service.Mediator.V1.PostCase.Crud.Handlers
 {
     public class CriarPostHandler : ICriarHandler<PostRequest, PostResponse>
     {
@@ -32,7 +32,7 @@ namespace Service.Mediator.V1.PostCase.Crud
             try
             {
                 var taskFiles = _fileService.SaveFilesAsync(request.Entidade.Files, request.User);
-                
+
                 var post = _mapper.Map<PostRequest, Post>(request.Entidade);
 
                 post.User = request.User;
