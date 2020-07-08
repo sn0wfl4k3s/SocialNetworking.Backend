@@ -7,5 +7,10 @@ namespace Core.Service.Requests
     {
         public User User { get; set; }
         public TRequest Entidade { get; set; }
+
+        public CriarRequest(TRequest entidade)
+        {
+            Entidade = entidade;
+        }
     }
 }

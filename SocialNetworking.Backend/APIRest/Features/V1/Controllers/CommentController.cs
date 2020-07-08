@@ -64,7 +64,7 @@ namespace APIRest.Features.V1.Controllers
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Insert([FromForm] CommentRequest comment)
-            => await IdentifyUserAndProcess(new CriarRequest<CommentRequest, CommentResponse> { Entidade = comment });
+            => await IdentifyUserAndProcess(new CriarRequest<CommentRequest, CommentResponse>(comment));
 
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace APIRest.Features.V1.Controllers
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update([FromForm] CommentRequest comment, ulong id)
-            => await IdentifyUserAndProcess(new AtualizarRequest<CommentRequest, CommentResponse> { Entidade = comment, Id = id });
+            => await IdentifyUserAndProcess(new AtualizarRequest<CommentRequest, CommentResponse>(comment, id));
 
 
         /// <summary>
@@ -93,6 +93,6 @@ namespace APIRest.Features.V1.Controllers
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(ulong id)
-            => await IdentifyUserAndProcess(new RemoverRequest<CommentRequest, CommentResponse> { Id = id });
+            => await IdentifyUserAndProcess(new RemoverRequest<CommentRequest, CommentResponse>(id));
     }
 }

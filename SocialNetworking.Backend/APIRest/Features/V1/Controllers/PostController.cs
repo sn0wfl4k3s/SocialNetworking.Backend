@@ -65,7 +65,7 @@ namespace WebAPI.Features.V1.Controllers
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Insert([FromForm] PostRequest post)
-            => await IdentifyUserAndProcess(new CriarRequest<PostRequest, PostResponse> { Entidade = post });
+            => await IdentifyUserAndProcess(new CriarRequest<PostRequest, PostResponse>(post));
 
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace WebAPI.Features.V1.Controllers
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update([FromForm] PostRequest post, ulong id)
-            => await IdentifyUserAndProcess(new AtualizarRequest<PostRequest, PostResponse> { Entidade = post, Id = id });
+            => await IdentifyUserAndProcess(new AtualizarRequest<PostRequest, PostResponse>(post, id));
 
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace WebAPI.Features.V1.Controllers
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(ulong id)
-            => await IdentifyUserAndProcess(new RemoverRequest<PostRequest, PostResponse> { Id = id });
+            => await IdentifyUserAndProcess(new RemoverRequest<PostRequest, PostResponse>(id));
 
     }
 }

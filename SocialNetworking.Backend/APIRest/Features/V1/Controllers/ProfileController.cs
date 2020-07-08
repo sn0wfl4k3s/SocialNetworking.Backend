@@ -44,5 +44,13 @@ namespace APIRest.Features.V1.Controllers
         public async Task<IActionResult> SearchProfiles([FromQuery] SearchProfileRequest Search)
             => await IdentifyUserAndProcess(new ProcurarRequest<SearchProfileRequest, IEnumerable<UserResponse>>(Search));
 
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> UpdateMyProfile(UserRequest user, ulong id)
+            => await IdentifyUserAndProcess(new AtualizarRequest<UserRequest, UserResponse>(user, id));
+
     }
 }
