@@ -30,12 +30,10 @@ namespace Service.Mediator.V1.ProfileCase.Crud.Handlers
 
             try
             {
-                var isID = ulong.TryParse(request.Parameter, out _);
-
-                Expression<Func<User, bool>> userValido = u
-                    => isID ? u.Id.ToString() == request.Parameter : u.Username == request.Parameter;
-
-                var user = await _repository.ObterQueryEntidade().AsNoTracking().FirstOrDefaultAsync(userValido);
+                var user = await _repository
+                    .ObterQueryEntidade()
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(u => u.Username == request.Parameter);
 
                 var response = _mapper.Map<User, UserResponse>(user);
 

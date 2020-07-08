@@ -28,12 +28,12 @@ namespace APIRest.Features.V1.Controllers
         }
 
         [HttpGet]
-        [Route("{usernameOrId}")]
+        [Route("{username}")]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)] 
-        public async Task<IActionResult> GetProfile(string usernameOrId)
-            => await IdentifyUserAndProcess(new ObterRequest<UserResponse> { Parameter = usernameOrId });
+        public async Task<IActionResult> GetProfile(string username)
+            => await IdentifyUserAndProcess(new ObterRequest<UserResponse> { Parameter = username });
 
 
         [HttpGet]
