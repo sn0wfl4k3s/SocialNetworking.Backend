@@ -3,6 +3,7 @@ using Domain.Entity;
 using Domain.ViewModels.Comment;
 using Domain.ViewModels.FileReference;
 using Domain.ViewModels.Post;
+using Domain.ViewModels.User;
 using Service.Mediator.V1.AccountCase.Register;
 
 namespace Service.AutoMapper
@@ -13,7 +14,10 @@ namespace Service.AutoMapper
         {
             CreateMap<RegisterUserCommand, User>();
 
+            
             CreateMap<User, RegisterUserVM>();
+            
+            CreateMap<User, UserResponse>();
 
 
             CreateMap<CommentRequest, Comment>();

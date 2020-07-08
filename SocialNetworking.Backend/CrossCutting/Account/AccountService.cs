@@ -23,7 +23,7 @@ namespace CrossCutting.Account
             {
                 int random = new Random().Next();
 
-                username = string.Format(username, name, lastname, random);
+                username = string.Format(username, name.ToLower(), lastname.ToLower(), random);
 
             } while (_repository.ObterQueryEntidade().Any(u => u.Username == username));
 

@@ -7,5 +7,6 @@ namespace Core.Service.Requests
     {
         public User User { get; set; }
         public ulong Id { get; set; }
+        public string Parameter { get; set; }
     }
 }

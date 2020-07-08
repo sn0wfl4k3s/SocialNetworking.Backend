@@ -85,10 +85,10 @@ namespace MyNetwork.WebApi.Extensions
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<ICryptService, CryptService>();
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IFileService, FileService>();
+            services.AddTransient<ICryptService, CryptService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IFileService, FileService>();
 
             return services;
         }
