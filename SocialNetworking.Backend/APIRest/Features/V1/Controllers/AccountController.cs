@@ -22,6 +22,17 @@ namespace WebAPI.Features.V1.Controllers
         {
         }
 
+
+        /// <summary>
+        /// Sign in a user registred.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromQuery] LoginUserQuery query)
+            => await Process(query);
+
+
         /// <summary>
         /// Sign up a new user.
         /// </summary>
@@ -30,15 +41,5 @@ namespace WebAPI.Features.V1.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register(RegisterUserCommand command)
             => await Process(command);
-
-        /// <summary>
-        /// Sign in a user registred.
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("Login")]
-        public async Task<IActionResult> Login(LoginUserCommand query)
-            => await Process(query);
-
     }
 }

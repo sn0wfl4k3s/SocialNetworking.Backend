@@ -126,7 +126,7 @@ namespace MyNetwork.WebApi.Extensions
                 .ForEach(result => services.AddScoped(result.InterfaceType, result.ValidatorType));
 
             // Account
-            services.AddValidation<LoginUserCommand, LoginUserVM>();
+            services.AddValidation<LoginUserQuery, LoginUserVM>();
             services.AddValidation<RegisterUserCommand, RegisterUserVM>();
 
             // Comment

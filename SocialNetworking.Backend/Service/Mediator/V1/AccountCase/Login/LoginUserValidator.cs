@@ -2,7 +2,7 @@
 
 namespace Service.Mediator.V1.AccountCase.Login.Validation
 {
-    public class LoginUserValidator : AbstractValidator<LoginUserCommand>
+    public class LoginUserValidator : AbstractValidator<LoginUserQuery>
     {
         public LoginUserValidator()
         {

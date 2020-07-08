@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Service.Mediator.V1.AccountCase.Login
 {
-    public class LoginUserHandler : IRequestHandler<LoginUserCommand, Response<LoginUserVM>>
+    public class LoginUserHandler : IRequestHandler<LoginUserQuery, Response<LoginUserVM>>
     {
         private readonly IEntityRepository<User> _repository;
         private readonly IAuthenticationService _authenticationService;
@@ -26,7 +26,7 @@ namespace Service.Mediator.V1.AccountCase.Login
             _cryptService = cryptService;
         }
 
-        public async Task<Response<LoginUserVM>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+        public async Task<Response<LoginUserVM>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
         {
             var response = new Response<LoginUserVM>();
 
