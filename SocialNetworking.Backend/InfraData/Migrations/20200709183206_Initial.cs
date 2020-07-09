@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InfraData.Migrations
 {
@@ -25,6 +25,34 @@ namespace InfraData.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Friendships",
+                columns: table => new
+                {
+                    Id = table.Column<ulong>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FromId = table.Column<ulong>(nullable: true),
+                    ToId = table.Column<ulong>(nullable: true),
+                    RequestDate = table.Column<DateTime>(nullable: false),
+                    ConfirmationDate = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friendships", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Friendships_Users_FromId",
+                        column: x => x.FromId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Friendships_Users_ToId",
+                        column: x => x.ToId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,6 +169,16 @@ namespace InfraData.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Friendships_FromId",
+                table: "Friendships",
+                column: "FromId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friendships_ToId",
+                table: "Friendships",
+                column: "ToId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_UserId",
                 table: "Posts",
                 column: "UserId");
@@ -150,6 +188,9 @@ namespace InfraData.Migrations
         {
             migrationBuilder.DropTable(
                 name: "FileReferences");
+
+            migrationBuilder.DropTable(
+                name: "Friendships");
 
             migrationBuilder.DropTable(
                 name: "Comments");

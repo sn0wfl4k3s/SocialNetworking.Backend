@@ -87,6 +87,33 @@ namespace InfraData.Migrations
                     b.ToTable("FileReferences");
                 });
 
+            modelBuilder.Entity("Domain.Entity.Friendship", b =>
+                {
+                    b.Property<ulong>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("ConfirmationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong?>("FromId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong?>("ToId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromId");
+
+                    b.HasIndex("ToId");
+
+                    b.ToTable("Friendships");
+                });
+
             modelBuilder.Entity("Domain.Entity.Post", b =>
                 {
                     b.Property<ulong>("Id")
@@ -174,6 +201,17 @@ namespace InfraData.Migrations
                     b.HasOne("Domain.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Friendship", b =>
+                {
+                    b.HasOne("Domain.Entity.User", "From")
+                        .WithMany()
+                        .HasForeignKey("FromId");
+
+                    b.HasOne("Domain.Entity.User", "To")
+                        .WithMany()
+                        .HasForeignKey("ToId");
                 });
 
             modelBuilder.Entity("Domain.Entity.Post", b =>
