@@ -44,6 +44,7 @@ namespace APIRest.Features.V1.Controllers
         public async Task<IActionResult> SearchProfiles([FromQuery] SearchProfileRequest Search)
             => await IdentifyUserAndProcess(new ProcurarRequest<SearchProfileRequest, IEnumerable<UserResponse>>(Search));
 
+
         [HttpPut]
         [Route("{id}")]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
