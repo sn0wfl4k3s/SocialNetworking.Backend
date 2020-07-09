@@ -12,7 +12,9 @@ namespace InfraData
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Friendship> Friendships { get; set; }
         public virtual DbSet<FileReference> FileReferences { get; set; }
+
 
         // ~ Migrations ~
         // In Console:
@@ -34,8 +36,9 @@ namespace InfraData
         {
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new PostMap());
-            modelBuilder.ApplyConfiguration(new FileReferenceMap());
             modelBuilder.ApplyConfiguration(new CommentMap());
+            modelBuilder.ApplyConfiguration(new FriendshipMap());
+            modelBuilder.ApplyConfiguration(new FileReferenceMap());
         }
     }
 }
