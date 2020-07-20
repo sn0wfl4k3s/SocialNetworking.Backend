@@ -2,6 +2,7 @@
 using Domain.Entity;
 using Domain.ViewModels.Comment;
 using Domain.ViewModels.FileReference;
+using Domain.ViewModels.Friendship;
 using Domain.ViewModels.Post;
 using Domain.ViewModels.User;
 using Service.Mediator.V1.AccountCase.Register;
@@ -40,6 +41,7 @@ namespace Service.AutoMapper
                 .ForMember(dest => dest.Files, options => options.MapFrom(src => src.FileReferences))
                 ;
 
+            CreateMap<Friendship, FriendshipResponse>();
 
             //Mapper.AssertConfigurationIsValid(); //Is OK!
         }
