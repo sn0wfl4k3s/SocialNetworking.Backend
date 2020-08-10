@@ -59,7 +59,7 @@ namespace CrossCutting.File
         {
             var fileReferences = new List<FileReference>();
 
-            if (files != null)
+            if (files is not null)
             {
                 foreach (var file in files)
                     fileReferences.Add(await SaveFileAsync(file, user));
