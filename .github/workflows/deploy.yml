@@ -28,7 +28,7 @@ jobs:
           dockerfileContent="FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim\n"
           dockerfileContent+="WORKDIR /app\n"
           dockerfileContent+="COPY . .\n"
-          dockerfileContent+="CMD ASPNETCORE_URLS=http://*:$PORT dotnet ./${PROJECT_NAME}"
+          dockerfileContent+="CMD ASPNETCORE_URLS=http://*:$PORT ./${PROJECT_NAME}"
           
           echo -e $dockerfileContent > Dockerfile
           
