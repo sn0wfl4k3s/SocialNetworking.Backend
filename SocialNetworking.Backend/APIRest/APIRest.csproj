@@ -9,12 +9,6 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <AssemblyName>APIRest</AssemblyName>
-    <RootNamespace>APIRest</RootNamespace>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>true</Optimize>
   </PropertyGroup>
@@ -29,6 +23,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    <PackageReference Include="WebHerokuPort" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

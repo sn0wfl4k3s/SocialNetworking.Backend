@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using WebHerokuPort;
 
 namespace WebAPI
 {
@@ -14,7 +15,9 @@ namespace WebAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseHerokuPort()
+                        .UseStartup<Startup>();
                 });
     }
 }
