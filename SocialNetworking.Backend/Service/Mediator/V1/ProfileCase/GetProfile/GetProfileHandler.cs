@@ -20,7 +20,7 @@ namespace Service.Mediator.V1.ProfileCase.GetProfile
             _mapper = mapper;
         }
 
-        public async Task<Response<GetProfileVM>> Handle(GetProfileQuery request, CancellationToken cancellationToken)
+        public  Task<Response<GetProfileVM>> Handle(GetProfileQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
