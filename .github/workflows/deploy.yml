@@ -22,13 +22,13 @@ jobs:
           PROJECT_NAME: "APIRest"
         run: |
           cd SocialNetworking.Backend/${PROJECT_NAME}/
-          dotnet publish -c Release -o ../publish
+          dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o ../publish
           cd ../publish
           
           dockerfileContent="FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim\n"
           dockerfileContent+="WORKDIR /app\n"
           dockerfileContent+="COPY . .\n"
-          dockerfileContent+="CMD ASPNETCORE_URLS=http://*:$PORT dotnet ${PROJECT_NAME}.dll"
+          dockerfileContent+="CMD ASPNETCORE_URLS=http://*:$PORT dotnet ./${PROJECT_NAME}"
           
           echo -e $dockerfileContent > Dockerfile
           
