@@ -37,5 +37,6 @@ jobs:
           heroku container:login
           heroku container:push web -a ${{ secrets.HEROKU_APP_NAME }}
           heroku container:release web -a ${{ secrets.HEROKU_APP_NAME }}
+          heroku config:set JWT_SIGNINGKEY=${{ secrets.JWT_SIGNINGKEY }} -a ${{ secrets.HEROKU_APP_NAME }}
           
           echo "Deploy concluído com sucesso!"
