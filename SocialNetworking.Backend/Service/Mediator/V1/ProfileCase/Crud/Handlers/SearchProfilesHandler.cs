@@ -7,9 +7,12 @@ using Domain.Entity;
 using Domain.ViewModels.Other;
 using Domain.ViewModels.User;
 using LinqKit;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,7 +35,7 @@ namespace Service.Mediator.V1.ProfileCase.Crud.Handlers
 
             try
             {
-                var listaUsuarios = _repository.ObterQueryEntidade().ToList();
+                var listaUsuarios = _repository.ObterQueryEntidade().AsNoTracking().ToListAsync();
 
                 var search = request.Entidade;
 
@@ -40,25 +43,29 @@ namespace Service.Mediator.V1.ProfileCase.Crud.Handlers
 
                 if (!string.IsNullOrEmpty(search.Name))
                 {
-                    predicate = predicate.And(u => u.Name.Contains(search.Name, StringComparison.InvariantCultureIgnoreCase));
+                    predicate = predicate.And(u => u.Name.RemoveAccents()
+                        .Contains(search.Name.RemoveAccents(), StringComparison.InvariantCultureIgnoreCase));
                 }
 
                 if (!string.IsNullOrEmpty(search.Lastname))
                 {
-                    predicate = predicate.And(u => u.LastName.Contains(search.Lastname, StringComparison.InvariantCultureIgnoreCase));
+                    predicate = predicate.And(u => u.LastName.RemoveAccents()
+                        .Contains(search.Lastname.RemoveAccents(), StringComparison.InvariantCultureIgnoreCase));
                 }
 
                 if (!string.IsNullOrEmpty(search.Email))
                 {
-                    predicate = predicate.And(u => u.Email.Contains(search.Email, StringComparison.InvariantCultureIgnoreCase));
+                    predicate = predicate.And(u => u.Email.RemoveAccents()
+                        .Contains(search.Email.RemoveAccents(), StringComparison.InvariantCultureIgnoreCase));
                 }
 
                 if (!string.IsNullOrEmpty(search.Biography))
                 {
-                    predicate = predicate.And(u => u.Biography.Contains(search.Biography, StringComparison.InvariantCultureIgnoreCase));
+                    predicate = predicate.And(u => u.Biography.RemoveAccents()
+                        .Contains(search.Biography.RemoveAccents(), StringComparison.InvariantCultureIgnoreCase));
                 }
 
-                var usuariosFiltrados = listaUsuarios.Where(predicate).ToList();
+                var usuariosFiltrados = (await listaUsuarios).Where(predicate).ToList();
 
                 var response = _mapper.Map<IEnumerable<UserResponse>>(usuariosFiltrados);
 
@@ -70,6 +77,17 @@ namespace Service.Mediator.V1.ProfileCase.Crud.Handlers
             }
 
             return await Task.FromResult(error);
+        }
+    }
+
+    public static class StringExtension
+    {
+        public static string RemoveAccents(this string str)
+        {
+            return new string(str
+                .Normalize(NormalizationForm.FormD)
+                .Where(ch => char.GetUnicodeCategory(ch) != UnicodeCategory.NonSpacingMark)
+                .ToArray());
         }
     }
 }
