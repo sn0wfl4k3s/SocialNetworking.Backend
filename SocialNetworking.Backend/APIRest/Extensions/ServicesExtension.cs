@@ -36,20 +36,16 @@ namespace MyNetwork.WebApi.Extensions
 {
     public static class ServicesExtension
     {
-        public static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+        //public static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)
+        //{
+        //    services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-            return services;
-        }
+        //    return services;
+        //}
 
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
         {
-            var provider = services.BuildServiceProvider();
-
-            var options = provider.GetService<IOptions<JwtSettings>>();
-
-            var key = Encoding.ASCII.GetBytes(options.Value.SigningKey);
+            var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_SIGNINGKEY"));
 
             services
                 .AddAuthentication(options =>

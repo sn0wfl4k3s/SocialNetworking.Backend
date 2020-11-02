@@ -28,11 +28,11 @@ namespace CrossCutting.Authentication
         {
             var handler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(_settings.SigningKey);
+            var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_SIGNINGKEY"));
 
             var securitykey = new SymmetricSecurityKey(key);
 
-            var expires = DateTime.UtcNow.AddMinutes(_settings.ValidTokenMinutes);
+            var expires = DateTime.UtcNow.AddMinutes(1440);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

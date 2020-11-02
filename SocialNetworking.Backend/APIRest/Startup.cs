@@ -26,8 +26,6 @@ namespace WebAPI
 
             services.AddDbContext<ApplicationDbContext>();
 
-            services.AddConfigurations(Configuration);
-
             services.AddAuthSwagger("SN API");
 
             services.AddServices();
