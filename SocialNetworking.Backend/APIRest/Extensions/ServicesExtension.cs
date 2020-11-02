@@ -5,7 +5,6 @@ using Core.Service.Requests;
 using Core.Service.Validations;
 using CrossCutting.Account;
 using CrossCutting.Authentication;
-using CrossCutting.Configuration;
 using CrossCutting.File;
 using CrossCutting.Security;
 using Domain.Entity;
@@ -18,9 +17,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Service.Mediator.V1.AccountCase.Login;
@@ -36,13 +33,6 @@ namespace MyNetwork.WebApi.Extensions
 {
     public static class ServicesExtension
     {
-        //public static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)
-        //{
-        //    services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-
-        //    return services;
-        //}
-
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
         {
             var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_SIGNINGKEY"));

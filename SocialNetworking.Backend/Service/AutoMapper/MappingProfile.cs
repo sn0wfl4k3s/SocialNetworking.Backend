@@ -15,9 +15,9 @@ namespace Service.AutoMapper
         {
             CreateMap<RegisterUserCommand, User>();
 
-            
+
             CreateMap<User, RegisterUserVM>();
-            
+
             CreateMap<UserRequest, User>();
 
             CreateMap<User, UserResponse>();

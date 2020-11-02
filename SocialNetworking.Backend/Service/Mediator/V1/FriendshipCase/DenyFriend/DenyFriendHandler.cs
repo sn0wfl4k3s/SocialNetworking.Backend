@@ -38,7 +38,7 @@ namespace Service.Mediator.V1.FriendshipCase.DenyFriend
 
                 var friendshipDenied = await _repositoryF.RemoverEntidadeAsync(friendship);
 
-                var response = _mapper.Map<Friendship ,FriendshipResponse>(friendshipDenied);
+                var response = _mapper.Map<Friendship, FriendshipResponse>(friendshipDenied);
 
                 return await Task.FromResult(new Response<FriendshipResponse>(response));
             }

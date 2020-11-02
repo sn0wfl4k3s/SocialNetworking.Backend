@@ -31,7 +31,7 @@ namespace APIRest.Features.V1.Controllers
         [Route("{username}")]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)] 
+        [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetProfile(string username)
             => await IdentifyUserAndProcess(new ObterRequest<UserResponse> { Parameter = username });
 

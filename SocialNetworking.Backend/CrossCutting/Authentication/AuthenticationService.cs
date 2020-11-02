@@ -1,8 +1,6 @@
 ﻿using Core.Domain;
-using CrossCutting.Configuration;
 using CrossCutting.Constants;
 using Domain.Entity;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,12 +13,10 @@ namespace CrossCutting.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly JwtSettings _settings;
         private readonly IEntityRepository<User> _repository;
 
-        public AuthenticationService(IOptions<JwtSettings> options, IEntityRepository<User> repository)
+        public AuthenticationService(IEntityRepository<User> repository)
         {
-            _settings = options.Value;
             _repository = repository;
         }
 

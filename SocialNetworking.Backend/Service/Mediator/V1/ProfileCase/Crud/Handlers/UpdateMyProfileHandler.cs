@@ -47,7 +47,7 @@ namespace Service.Mediator.V1.ProfileCase.Crud.Handlers
                     var response = _mapper.Map<User, UserResponse>(resultado);
 
                     return await Task.FromResult(new Response<UserResponse>(response));
-                } 
+                }
                 else
                 {
                     throw new ActionNotPermittedException();
