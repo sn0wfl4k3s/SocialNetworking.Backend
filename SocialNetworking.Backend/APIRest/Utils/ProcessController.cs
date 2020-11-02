@@ -35,8 +35,6 @@ namespace APIRest.Utils
 
             var task = _mediator.Send(command);
 
-            _logger.LogInformation(JsonConvert.SerializeObject(command));
-
             var response = await task;
 
             if (response.HasError())
@@ -52,8 +50,6 @@ namespace APIRest.Utils
         protected virtual async Task<IActionResult> Process<T>(IRequest<Response<T>> command)
         {
             var task = _mediator.Send(command);
-
-            _logger.LogInformation(JsonConvert.SerializeObject(command));
 
             var response = await task;
 

@@ -5,6 +5,7 @@ using Core.Service.Handlers;
 using Core.Service.Requests;
 using Domain.Entity;
 using Domain.ViewModels.Post;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,14 @@ namespace Service.Mediator.V1.PostCase.Crud.Handlers
             {
                 var username = string.IsNullOrEmpty(request.Parameter) ? request.User.Username : request.Parameter;
 
-                var lista = _repository.ObterQueryEntidade().Where(p => p.User.Username == username).ToList();
+                var lista = _repository
+                    .ObterQueryEntidade()
+                    .Include(p => p.User)
+                    .Include(p => p.Comments)
+                    .Include(p => p.FileReferences)
+                    .AsNoTracking()
+                    .Where(p => p.User.Username == username)
+                    .ToList();
 
                 var response = _mapper.Map<IEnumerable<PostResponse>>(lista);
 

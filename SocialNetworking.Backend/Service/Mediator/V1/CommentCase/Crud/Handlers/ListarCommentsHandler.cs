@@ -7,6 +7,7 @@ using Domain.Entity;
 using Domain.ViewModels.Comment;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,7 +33,14 @@ namespace Service.Mediator.V1.CommentCase.Crud.Handlers
             {
                 var username = string.IsNullOrEmpty(request.Parameter) ? request.User.Username : request.Parameter;
 
-                var lista = _repository.ObterQueryEntidade().Where(c => c.User.Username == username).ToList();
+                var lista = _repository
+                    .ObterQueryEntidade()
+                    .Include(c => c.User)
+                    .Include(c => c.Post)
+                    .Include(c => c.FileReferences)
+                    .AsNoTracking()
+                    .Where(c => c.User.Username == username)
+                    .ToList();
 
                 var response = _mapper.Map<IEnumerable<CommentResponse>>(lista);
 

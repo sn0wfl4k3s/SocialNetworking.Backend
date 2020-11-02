@@ -26,9 +26,9 @@ namespace InfraData
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                    .UseLazyLoadingProxies()
-                    .UseSqlite("Data Source=database.db")
-                    .EnableSensitiveDataLogging();
+                    //.UseLazyLoadingProxies() // ← resolvi retirar para melhorar a perfomance
+                    //.EnableSensitiveDataLogging() // ← resolvi retirar para preservar a segurança
+                    .UseSqlite("Data Source=database.db");
             }
         }
 
