@@ -4,6 +4,7 @@ using Core.Service;
 using Core.Service.Handlers;
 using Core.Service.Requests;
 using CrossCutting.File;
+using CrossCutting.Time;
 using Domain.Entity;
 using Domain.ViewModels.Comment;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,7 @@ namespace Service.Mediator.V1.CommentCase.Crud.Handlers
 
                 comment.User = request.User;
 
-                comment.Created = DateTime.Now;
+                comment.Created = DateTimeUtil.BrazilDateTimeNow();
 
                 comment.Post = await taskPost;
 

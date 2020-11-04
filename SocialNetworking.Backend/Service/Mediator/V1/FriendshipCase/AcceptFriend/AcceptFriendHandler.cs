@@ -2,6 +2,7 @@
 using Core.Domain;
 using Core.Service;
 using Core.Service.Core;
+using CrossCutting.Time;
 using Domain.Entity;
 using Domain.ViewModels.Friendship;
 using System;
@@ -36,7 +37,7 @@ namespace Service.Mediator.V1.FriendshipCase.AcceptFriend
                 var friendship = _repositoryF.ObterQueryEntidade()
                     .FirstOrDefault(f => f.To == request.User && f.From == userWhoDoTheRequest);
 
-                friendship.ConfirmationDate = DateTime.Now;
+                friendship.ConfirmationDate = DateTimeUtil.BrazilDateTimeNow();
 
                 var friendshipUpdated = await _repositoryF.AtualizarEntidadeAsync(friendship);
 

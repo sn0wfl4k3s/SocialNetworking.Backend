@@ -3,6 +3,7 @@ using Core.Domain;
 using Core.Service;
 using CrossCutting.Account;
 using CrossCutting.Security;
+using CrossCutting.Time;
 using Domain.Entity;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +40,7 @@ namespace Service.Mediator.V1.AccountCase.Register
                 {
                     var user = _mapper.Map<RegisterUserCommand, User>(request);
 
-                    user.Created = DateTime.Now;
+                    user.Created = DateTimeUtil.BrazilDateTimeNow();
 
                     user.Username = _accountService.GenerateUsername(user.Name, user.LastName);
 

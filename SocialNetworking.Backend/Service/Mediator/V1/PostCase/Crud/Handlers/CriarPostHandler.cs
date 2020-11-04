@@ -4,6 +4,7 @@ using Core.Service;
 using Core.Service.Handlers;
 using Core.Service.Requests;
 using CrossCutting.File;
+using CrossCutting.Time;
 using Domain.Entity;
 using Domain.ViewModels.Post;
 using System;
@@ -39,7 +40,7 @@ namespace Service.Mediator.V1.PostCase.Crud.Handlers
 
                 post.FileReferences = await taskFiles;
 
-                post.Created = DateTime.Now;
+                post.Created = DateTimeUtil.BrazilDateTimeNow();
 
                 var postCriado = await _repository.CriarEntidadeAsync(post);
 
