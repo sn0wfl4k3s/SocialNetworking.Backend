@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Linq;
 
 namespace CrossCutting.Time
 {
     public static class DateTimeUtil
     {
+
         public static DateTime BrazilDateTimeNow()
-            => TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"));
+        {
+            TimeZoneInfo zone = TimeZoneInfo.GetSystemTimeZones().First(z => z.Id.ToLower().Contains("south america"));
+
+            return TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(zone.Id));
+        }
     }
 }
