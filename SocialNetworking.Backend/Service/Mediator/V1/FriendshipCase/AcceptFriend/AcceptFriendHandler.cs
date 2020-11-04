@@ -37,7 +37,7 @@ namespace Service.Mediator.V1.FriendshipCase.AcceptFriend
                 var friendship = _repositoryF.ObterQueryEntidade()
                     .FirstOrDefault(f => f.To == request.User && f.From == userWhoDoTheRequest);
 
-                friendship.ConfirmationDate = DateTimeUtil.BrazilDateTimeNow();
+                friendship.ConfirmationDate ??= DateTime.Now;
 
                 var friendshipUpdated = await _repositoryF.AtualizarEntidadeAsync(friendship);
 

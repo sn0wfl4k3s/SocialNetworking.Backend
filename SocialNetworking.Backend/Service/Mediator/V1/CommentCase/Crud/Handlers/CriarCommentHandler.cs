@@ -35,6 +35,8 @@ namespace Service.Mediator.V1.CommentCase.Crud.Handlers
 
             try
             {
+                request.Entidade.Created ??= DateTime.Now;
+
                 var taskFiles = _fileService.SaveFilesAsync(request.Entidade.Files, request.User);
 
                 var taskPost = _repositoryP.ObterQueryEntidade().FirstOrDefaultAsync(p => p.Id == request.Entidade.PostId);
@@ -42,8 +44,6 @@ namespace Service.Mediator.V1.CommentCase.Crud.Handlers
                 var comment = _mapper.Map<CommentRequest, Comment>(request.Entidade);
 
                 comment.User = request.User;
-
-                comment.Created = DateTimeUtil.BrazilDateTimeNow();
 
                 comment.Post = await taskPost;
 

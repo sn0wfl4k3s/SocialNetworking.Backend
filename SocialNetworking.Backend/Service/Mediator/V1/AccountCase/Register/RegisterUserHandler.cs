@@ -40,7 +40,7 @@ namespace Service.Mediator.V1.AccountCase.Register
                 {
                     var user = _mapper.Map<RegisterUserCommand, User>(request);
 
-                    user.Created = DateTimeUtil.BrazilDateTimeNow();
+                    user.Created = DateTime.Now;
 
                     user.Username = _accountService.GenerateUsername(user.Name, user.LastName);
 

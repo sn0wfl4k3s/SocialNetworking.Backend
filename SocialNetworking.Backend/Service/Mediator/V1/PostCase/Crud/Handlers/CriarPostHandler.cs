@@ -34,13 +34,13 @@ namespace Service.Mediator.V1.PostCase.Crud.Handlers
             {
                 var taskFiles = _fileService.SaveFilesAsync(request.Entidade.Files, request.User);
 
+                request.Entidade.Created ??= DateTime.Now;
+
                 var post = _mapper.Map<PostRequest, Post>(request.Entidade);
 
                 post.User = request.User;
 
                 post.FileReferences = await taskFiles;
-
-                post.Created = DateTimeUtil.BrazilDateTimeNow();
 
                 var postCriado = await _repository.CriarEntidadeAsync(post);
 

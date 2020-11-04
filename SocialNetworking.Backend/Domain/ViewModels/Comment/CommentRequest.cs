@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,8 @@ namespace Domain.ViewModels.Comment
 
         [Required]
         public string Description { get; set; }
+
+        public DateTime? Created { get; set; }
 
         public List<IFormFile> Files { get; set; }
     }
