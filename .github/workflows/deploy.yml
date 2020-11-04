@@ -20,6 +20,7 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           PROJECT_NAME: "APIRest"
+          HEROKU_APP_NAME: "social-networking-backend"
         run: |
           cd SocialNetworking.Backend/${PROJECT_NAME}/
           dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o ../publish
@@ -32,10 +33,10 @@ jobs:
           
           echo -e $dockerfileContent > Dockerfile
           
-          docker build -t ${{ secrets.HEROKU_APP_NAME }} .
+          docker build -t ${HEROKU_APP_NAME} .
           
           heroku container:login
-          heroku container:push web -a ${{ secrets.HEROKU_APP_NAME }}
-          heroku container:release web -a ${{ secrets.HEROKU_APP_NAME }}
+          heroku container:push web -a ${HEROKU_APP_NAME}
+          heroku container:release web -a ${HEROKU_APP_NAME}
           
           echo "Deploy concluído com sucesso!"
