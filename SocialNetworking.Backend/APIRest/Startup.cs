@@ -39,6 +39,8 @@ namespace WebAPI
             services.AddAutoMapper();
 
             services.AddMediatorWithValidations();
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +76,7 @@ namespace WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
 
             app.AddSwaggerVersionado(provider);
