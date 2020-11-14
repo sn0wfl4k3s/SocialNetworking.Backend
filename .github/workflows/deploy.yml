@@ -28,6 +28,7 @@ jobs:
       
       - name: Buildando container da aplicação
         run: |
+          ls
           dockerfileContent="FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim\n"
           dockerfileContent+="WORKDIR /app\n"
           dockerfileContent+="COPY . .\n"
