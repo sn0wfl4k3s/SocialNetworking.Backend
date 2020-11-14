@@ -1,4 +1,4 @@
-name: SocialNetworking.Backend - Deploy
+name: Heroku Deploy
 
 on:
   push:
@@ -8,6 +8,10 @@ jobs:
 
   deploy:
     
+    env:
+      PROJECT_NAME: "APIRest"
+      SOLUTION_NAME: "SocialNetworking.Backend"
+    
     runs-on: ubuntu-latest
 
     steps:
@@ -16,20 +20,24 @@ jobs:
         with:
           dotnet-version: 3.1
       
-      - name: Buildando e deployando o projeto para o Heroku
+      - name: Buildando a aplicação
+        run: |
+          cd ${{ env.SOLUTION_NAME }}/${{ env.PROJECT_NAME }}/
+          dotnet build
+      
+      - name: Deployando a aplicação para o Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          PROJECT_NAME: "APIRest"
           HEROKU_APP_NAME: "social-networking-backend"
         run: |
-          cd SocialNetworking.Backend/${PROJECT_NAME}/
+          cd ${{ env.SOLUTION_NAME }}/${{ env.PROJECT_NAME }}/
           dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o ../publish
           cd ../publish
           
           dockerfileContent="FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim\n"
           dockerfileContent+="WORKDIR /app\n"
           dockerfileContent+="COPY . .\n"
-          dockerfileContent+="CMD ASPNETCORE_URLS=http://*:$PORT ./${PROJECT_NAME}"
+          dockerfileContent+="CMD ASPNETCORE_URLS=http://*:$PORT ./${{ env.PROJECT_NAME }}"
           
           echo -e $dockerfileContent > Dockerfile
           
@@ -39,4 +47,4 @@ jobs:
           heroku container:push web -a ${HEROKU_APP_NAME}
           heroku container:release web -a ${HEROKU_APP_NAME}
           
-          echo "Deploy concluído com sucesso!"
+          echo "Deploy concluído com sucesso! =)"
