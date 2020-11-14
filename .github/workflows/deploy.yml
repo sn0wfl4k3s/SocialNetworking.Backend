@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: 3.1
       
-      - name: Buildando a aplicação
+      - name: Buildando e deployando o projeto para o Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           PROJECT_NAME: "APIRest"
@@ -25,10 +25,7 @@ jobs:
           cd SocialNetworking.Backend/${PROJECT_NAME}/
           dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true -o ../publish
           cd ../publish
-      
-      - name: Buildando container da aplicação
-        run: |
-          ls
+          
           dockerfileContent="FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim\n"
           dockerfileContent+="WORKDIR /app\n"
           dockerfileContent+="COPY . .\n"
@@ -38,8 +35,6 @@ jobs:
           
           docker build -t ${HEROKU_APP_NAME} .
           
-      - name: Deployando a aplicação para o Heroku
-        run: |
           heroku container:login
           heroku container:push web -a ${HEROKU_APP_NAME}
           heroku container:release web -a ${HEROKU_APP_NAME}
